@@ -1,0 +1,10 @@
+--no-sim
+--camera-host 192.168.123.164
+--camera-port 5555
+--record-wrist-cameras
+--data-exporter-frequency 50
+--no-text-to-speech
+--deploy-checkpoint policy/sonic_v1_1/model
+--deploy-obs-config policy/sonic_v1_1/observation_config.yaml
+--deploy-planner planner/target_vel/V2/planner_sonic.onnx
+--deploy-output-type zmq

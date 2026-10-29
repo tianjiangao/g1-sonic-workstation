@@ -1,0 +1,38 @@
+{
+  "left_wrist": {
+    "serial": "LEFT_CAMERA_SERIAL",
+    "confirmed": false,
+    "method": "user covered left camera; screenshot visually checked"
+  },
+  "right_wrist": {
+    "serial": "RIGHT_CAMERA_SERIAL",
+    "confirmed": false,
+    "method": "user confirmed 3720 is right wrist"
+  },
+  "ego_view": {
+    "serial": null,
+    "confirmed": false,
+    "model": "UVC binocular",
+    "type": "usb",
+    "device": "/dev/video_head",
+    "resolution": [
+      1280,
+      480
+    ],
+    "previous_unresolved_assumption": "D435i, superseded by actual UVC enumeration"
+  },
+  "ready": false,
+  "camera_config": {
+    "fps": 15,
+    "width": 640,
+    "height": 480,
+    "usb": "2.1",
+    "default_30hz_dual_stream": "FAIL: frame timeout",
+    "transport": "NVIDIA SONIC ImageMessageSchema",
+    "port": 5555,
+    "configured_publish_hz": 15,
+    "measured_aggregate_hz": 10.0,
+    "sensor_clocks_synchronized": false
+  },
+  "commissioning_note": "EXAMPLE ONLY: identify cameras and confirm physical roles at your own site."
+}

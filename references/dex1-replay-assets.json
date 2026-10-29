@@ -1,0 +1,51 @@
+{
+  "source": "https://huggingface.co/lerobot/unitree-g1-mujoco",
+  "revision": "68459ed68f6f68e1f661091dfcb6ebce44681aec",
+  "model_card_license": "unspecified",
+  "files": {
+    "README.md": {
+      "bytes": 5884,
+      "sha256": "0754fb1f7123c60578947e952e1882ec517ca9758155b3a5d7dd9b34a1663309"
+    },
+    "build_gripper_model.py": {
+      "bytes": 8262,
+      "sha256": "c53427d63aaed303f07bb3c7894c36360d5d7b1a1bff6959e394815c61314928"
+    },
+    "assets/g1_29dof_with_grippers.xml": {
+      "bytes": 40979,
+      "sha256": "f177bbfecb2bc9e1cbae9dee875a121e4d19de7a34523bf3ba8db527edc8fa54"
+    },
+    "assets/scene_33dof.xml": {
+      "bytes": 1223,
+      "sha256": "f9f18b6ed53688b3bfe8b0c5a2597fc9b7480cc2313b48035c32e7c006b6cb1d"
+    },
+    "assets/g1_29dof_with_dex1_1.urdf": {
+      "bytes": 39614,
+      "sha256": "0a25ea0ed77740ca66af74a9f3c2dae649324a369351bf2f6d5cab3555b5f059"
+    },
+    "reference/hiw500/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "assets/dex1_1/meshes/Dex1_base_link.STL": {
+      "bytes": 2824984,
+      "sha256": "03f1cb02f94d6b280953f6c5a10da2eab6220ea5c301408d3c4decca66c8cdad"
+    },
+    "assets/dex1_1/meshes/Dex1_finger_link_1.STL": {
+      "bytes": 313884,
+      "sha256": "7cd2ff199556e3955547a34c75ed9ea777fb7d704fc98e7318d0f67e4aaedf5a"
+    },
+    "assets/dex1_1/meshes/Dex1_finger_link_2.STL": {
+      "bytes": 313884,
+      "sha256": "e8297ce8184c64d34d70cd9d6c7b583fba6a3adae2075523e97fb956ada65eb3"
+    },
+    "assets/dex1_1/meshes/dex1_col_1.stl": {
+      "bytes": 75884,
+      "sha256": "5edf010f581635fcb4a79fe20cda65a96c95138112ab91d7e79629980f535c92"
+    },
+    "assets/dex1_1/meshes/dex1_col_2.stl": {
+      "bytes": 72884,
+      "sha256": "0d791ffb8b438bc4a5fd937eab383db4daa62685a73982e852cc559623036ba9"
+    }
+  }
+}

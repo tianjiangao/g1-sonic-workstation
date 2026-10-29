@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-29",
+  "classification": "engineering_only",
+  "fresh_machine_acceptance": false,
+  "checks": [
+    {
+      "name": "prepare_unit_tests",
+      "command": "python3 -m unittest discover -s tests -v",
+      "result": "PASS",
+      "run": 6,
+      "skipped": 0
+    },
+    {
+      "name": "source_capture_tests",
+      "command": "PYTHONPATH=wbc:. <existing-sim-python> -m unittest discover -s capture/tests -v",
+      "result": "PASS",
+      "run": 42,
+      "skipped": 1,
+      "skip_reason": "Optional neural voice weights/runtime excluded"
+    },
+    {
+      "name": "clean_checkout_install",
+      "command": "tools/prepare.py with pinned clean WBC; dry-run then --apply",
+      "result": "PASS",
+      "files_copied": 154,
+      "patch_files": 10,
+      "robot_started": false,
+      "packages_installed": false,
+      "policy_provisioned": false
+    },
+    {
+      "name": "installed_capture_tests",
+      "command": "PYTHONPATH=<installed-wbc>:<new-workspace> <existing-sim-python> -m unittest discover -s capture/tests -v",
+      "result": "PASS",
+      "run": 42,
+      "skipped": 1
+    },
+    {
+      "name": "installed_console_tests",
+      "command": "PYTHONPATH=<new-workspace>:<installed-wbc>:<existing-sdk> <existing-sim-python> -m unittest discover -s official_sonic/console/tests -v",
+      "result": "PASS",
+      "run": 116,
+      "skipped": 1
+    },
+    {
+      "name": "release_gripper_mapping_tests",
+      "command": "PYTHONPATH=wbc <existing-sim-python> -m unittest discover -s wbc/offline_replay/tests -p test_gripper.py -v",
+      "result": "PASS",
+      "run": 4,
+      "skipped": 0
+    },
+    {
+      "name": "earlier_release_capture_check",
+      "result": "FAIL",
+      "run": 42,
+      "errors": 2,
+      "reason": "Original-site absolute lock path in test and unbundled voice asset. Test isolation made portable; optional model test explicitly skipped. Failure log retained locally."
+    },
+    {
+      "name": "robot_motion_training_dynamics_and_new_machine_acceptance",
+      "result": "NOT_RUN"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "sonic-fixed-workflow-v2",
+  "immutable_without_explicit_user_revision": true,
+  "destination": {
+    "jump_user": "jump-user",
+    "jump_host": "192.0.2.10",
+    "target_user": "unitree",
+    "target_host": "192.0.2.20",
+    "port": 22,
+    "root": "/srv/g1/sonic-vla",
+    "nested_ssh_required": true
+  },
+  "sequence": [
+    "collect",
+    "human_review",
+    "token_convert",
+    "official_clean",
+    "dataset_validate",
+    "sync_and_verify",
+    "cloud_finetune",
+    "offline_evaluate",
+    "isolated_simulation",
+    "operator_authorized_real_acceptance"
+  ],
+  "wbc_commit": "7f151314d4d1606544bf249d2a7a1cb754c64582",
+  "groot_commit": "51d4c89f72fda44cbf77285c6a8114b52676b8a1",
+  "base_revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+  "backbone_revision": "9ce19a195e423419c349abfc86fd07178b230561",
+  "embodiment": "NEW_EMBODIMENT",
+  "state_dim": 34,
+  "action_dim": 66,
+  "motion_token_dim": 64,
+  "dex1_dims": [
+    1,
+    1
+  ],
+  "action_horizon": 40,
+  "action_grid_hz": 50,
+  "gpu_count": 8,
+  "minimum_free_gib_per_gpu_for_full_training": 35,
+  "inplace_cleaning": false,
+  "unreviewed_training": false,
+  "automatic_robot_control": false,
+  "credentials_in_artifacts": false,
+  "revision_reason": "2026-10-27 explicit user authorization: local review/conversion/cleaning/acceptance before nested SSH transfer; remote training only",
+  "local_processing": {
+    "root": "/opt/g1/workspace",
+    "datasets": "/opt/g1/workspace/datasets",
+    "engineering_reports": "/opt/g1/workspace/reports",
+    "stages": [
+      "human_review",
+      "token_convert",
+      "official_clean",
+      "dataset_validate"
+    ],
+    "reuse_existing_environments": true
+  },
+  "handoff": {
+    "accepted_only": true,
+    "formal_namespace": "datasets/accepted",
+    "engineering_namespace": "datasets/engineering",
+    "engineering_never_formal": true,
+    "verify_all_files": true,
+    "atomic_publish": true
+  }
+}

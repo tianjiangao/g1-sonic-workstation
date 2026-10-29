@@ -1,0 +1,23 @@
+{
+  "name": "sonic_dex1_8xl40",
+  "gpus": 8,
+  "expected_gpu": "NVIDIA L40",
+  "minimum_vram_gib_per_gpu": 40,
+  "global_batch_size": 64,
+  "per_device_batch_size": 8,
+  "gradient_accumulation_steps": 1,
+  "max_steps": 20000,
+  "save_steps": 5000,
+  "save_total_limit": 5,
+  "tune_llm": false,
+  "tune_visual": false,
+  "tune_projector": true,
+  "tune_diffusion_model": true,
+  "embodiment_tag": "NEW_EMBODIMENT",
+  "modality_config": "sonic_pipeline/dex1_modality.py",
+  "action_dimension": 66,
+  "action_horizon": 40,
+  "action_grid_hz": 50,
+  "wandb_enabled": false,
+  "robot_control_started": false
+}

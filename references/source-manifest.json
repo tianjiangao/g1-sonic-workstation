@@ -1,0 +1,1283 @@
+[
+  {
+    "path": "capture/batches.py",
+    "source_group": "workstation",
+    "source_sha256": "5ef5da001acaf2f764c31a4ba99fcc153a8c2cba41af65716bb29e0c960bcc6e",
+    "published_sha256": "5ef5da001acaf2f764c31a4ba99fcc153a8c2cba41af65716bb29e0c960bcc6e",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/core.py",
+    "source_group": "workstation",
+    "source_sha256": "733ccd863dd9ffd7d98f873470262c2efcf6a67ada05c3db6961bde56eea8328",
+    "published_sha256": "733ccd863dd9ffd7d98f873470262c2efcf6a67ada05c3db6961bde56eea8328",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/export.py",
+    "source_group": "workstation",
+    "source_sha256": "9a154e0aff0a513772de6183b0b1cafd55cebf4fad05370476dd9ea2a930baad",
+    "published_sha256": "6c4f4077046c7feb4dd2f69ca2f36c8fa0c7dce854a8a7dce82394df85108fd5",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/export.sh",
+    "source_group": "workstation",
+    "source_sha256": "3ee1bfeb9f7bc276469fe2289d782a657a92376c447ff3a4b65c049dd7814fd4",
+    "published_sha256": "b456082d1e868e94b9044a5421e134cdc6ef080e65ee54240d26ede153f1b432",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/live_view.py",
+    "source_group": "workstation",
+    "source_sha256": "91a79d24b2c9990e13da2d6ffba467de25129edc38a6664152cb5a69d14406a3",
+    "published_sha256": "91a79d24b2c9990e13da2d6ffba467de25129edc38a6664152cb5a69d14406a3",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/neural_voice.py",
+    "source_group": "workstation",
+    "source_sha256": "bc92192c4f0d12968c38261631a523939288e3455d1695c25b341984febd7b10",
+    "published_sha256": "bc92192c4f0d12968c38261631a523939288e3455d1695c25b341984febd7b10",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/pcm.py",
+    "source_group": "workstation",
+    "source_sha256": "33599f60cb950da2f581e27c919c29a0955e552be2246dc84e5cb10a9b0682a3",
+    "published_sha256": "33599f60cb950da2f581e27c919c29a0955e552be2246dc84e5cb10a9b0682a3",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/record.py",
+    "source_group": "workstation",
+    "source_sha256": "6e547647486247d71c72a9bb64776e3a0d9d6261e232077dbef6cbc44943be32",
+    "published_sha256": "10bb150f91d2ba5399be5945a83add8f2b05651228ec1508eb22edf9144da108",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/robot_audio.py",
+    "source_group": "workstation",
+    "source_sha256": "6f8405ecd94031d978c3c998cd6936822547f536d2a86eca939c67d620fe04fc",
+    "published_sha256": "6f8405ecd94031d978c3c998cd6936822547f536d2a86eca939c67d620fe04fc",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/sonic_camera.py",
+    "source_group": "workstation",
+    "source_sha256": "5a5e8804a766eb18ef3e6a0ef2c65b8fc27914abb371c47fd5464e79902d4f74",
+    "published_sha256": "5a5e8804a766eb18ef3e6a0ef2c65b8fc27914abb371c47fd5464e79902d4f74",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/speech.py",
+    "source_group": "workstation",
+    "source_sha256": "27096b5e8877de097cdac85a0e039a6babd156a3d2328368f049f4f34921349d",
+    "published_sha256": "0f52b54eb4027e44688eea27f8d14e9914941033ed9789f701b153eec5ffabef",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/start.sh",
+    "source_group": "workstation",
+    "source_sha256": "72c087eef89972c7ddd35ddc3cad088746597ff0b0e9fceb78f339e7a5a664a5",
+    "published_sha256": "5ef2cd7f2737b3898eb02d41842fddf5c458d213f44cbe48bf7a19d74c91aaf9",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/tests/integration_offline.py",
+    "source_group": "workstation",
+    "source_sha256": "364065857d9f7c0fa2987ecef553ade525e8825c91a8915e8e343ce787a60e16",
+    "published_sha256": "364065857d9f7c0fa2987ecef553ade525e8825c91a8915e8e343ce787a60e16",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_audio_level.py",
+    "source_group": "workstation",
+    "source_sha256": "15154b41517981e5afb9a6f374cb3d78aa6702ddd5e0f84be868c91fc27ad591",
+    "published_sha256": "15154b41517981e5afb9a6f374cb3d78aa6702ddd5e0f84be868c91fc27ad591",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_batches.py",
+    "source_group": "workstation",
+    "source_sha256": "3aaf50e1b2ded1d052993956aa0d28873919b3aca07d7a512b3c317152f309e3",
+    "published_sha256": "a765ded5d1e9f5b459ff671be609b23e43c04d66a7b7450a690d7b719306abce",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/tests/test_contract.py",
+    "source_group": "workstation",
+    "source_sha256": "29f1457682598fabc1ee00eb504cce18fe44002fe8842bb0faadca6f384c8e58",
+    "published_sha256": "29f1457682598fabc1ee00eb504cce18fe44002fe8842bb0faadca6f384c8e58",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_feedback.py",
+    "source_group": "workstation",
+    "source_sha256": "1caeb6f9bc37fa0c933c186557efc80a05cb36680a945b823d79f933e56c7f7d",
+    "published_sha256": "1caeb6f9bc37fa0c933c186557efc80a05cb36680a945b823d79f933e56c7f7d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_pcm.py",
+    "source_group": "workstation",
+    "source_sha256": "0185cc94c9c0cbb6a828ce6c4e2d4b0f3dfee6e2790c6fa5ea5d42cc9d986e8d",
+    "published_sha256": "a02869a74728dbb7f6f0fa306d20f422d90213e23463d7bf43f6c1f82265e457",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "capture/tests/test_robot_speech.py",
+    "source_group": "workstation",
+    "source_sha256": "5b1b560b84dcb4b9534ac2b192d4f7e8ca701f6bae0a5af4ec5072b7af44b1c1",
+    "published_sha256": "5b1b560b84dcb4b9534ac2b192d4f7e8ca701f6bae0a5af4ec5072b7af44b1c1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_runtime.py",
+    "source_group": "workstation",
+    "source_sha256": "059c5d278a3b469629016f0b5a304419ce968c50a2940e16a06a07fd6ee17772",
+    "published_sha256": "059c5d278a3b469629016f0b5a304419ce968c50a2940e16a06a07fd6ee17772",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_shutdown.py",
+    "source_group": "workstation",
+    "source_sha256": "53c14b4d9ff29385e7bad87ebae101de6795348a68d4f97e0709a87e9fb94d9f",
+    "published_sha256": "53c14b4d9ff29385e7bad87ebae101de6795348a68d4f97e0709a87e9fb94d9f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_sonic_camera.py",
+    "source_group": "workstation",
+    "source_sha256": "4f8b7c77ce4793124a15d267a394ac91535c2824b12ec8ac2fe7f56b71360def",
+    "published_sha256": "4f8b7c77ce4793124a15d267a394ac91535c2824b12ec8ac2fe7f56b71360def",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/tests/test_workbench.py",
+    "source_group": "workstation",
+    "source_sha256": "fc89b8c76c6a9d8a34170e39a871cca68eb59cd93427c626bd9a1155aa17fc14",
+    "published_sha256": "fc89b8c76c6a9d8a34170e39a871cca68eb59cd93427c626bd9a1155aa17fc14",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "capture/workbench.py",
+    "source_group": "workstation",
+    "source_sha256": "7312ac84b8d421c80bcae5b9f216b263e12398a1becd7857f98163543240ab2b",
+    "published_sha256": "7312ac84b8d421c80bcae5b9f216b263e12398a1becd7857f98163543240ab2b",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/__init__.py",
+    "source_group": "workstation",
+    "source_sha256": "8c3bbfa3853acb15604f7528a6bb9afabc357a84459be885d795a1083cfb2e52",
+    "published_sha256": "8c3bbfa3853acb15604f7528a6bb9afabc357a84459be885d795a1083cfb2e52",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/acceptance.py",
+    "source_group": "workstation",
+    "source_sha256": "dcceae70617b024de10e0a3f82c029b5fd0d36848d86bf9c95ac882a56e1fe15",
+    "published_sha256": "dcceae70617b024de10e0a3f82c029b5fd0d36848d86bf9c95ac882a56e1fe15",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cli.py",
+    "source_group": "workstation",
+    "source_sha256": "ba3019d4b973b8b08c9b3a4892141646da9bbf1421815a4de02e995df4a6992d",
+    "published_sha256": "ba3019d4b973b8b08c9b3a4892141646da9bbf1421815a4de02e995df4a6992d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/bootstrap.sh",
+    "source_group": "workstation",
+    "source_sha256": "c50297fb463abf86cc8aee7ea79864e01ddf506931161061d72244d7edda1772",
+    "published_sha256": "c50297fb463abf86cc8aee7ea79864e01ddf506931161061d72244d7edda1772",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/download_model.sh",
+    "source_group": "workstation",
+    "source_sha256": "afacf3b7fbb9478647b3f1e192f76e2ce569b34fc8bfc29f242b8fd9898947ce",
+    "published_sha256": "afacf3b7fbb9478647b3f1e192f76e2ce569b34fc8bfc29f242b8fd9898947ce",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/preflight_8xl40.sh",
+    "source_group": "workstation",
+    "source_sha256": "76390146546112fd5b52c42ffc2d02c34ff1d8c67fffc3b8291def760d3e493d",
+    "published_sha256": "76390146546112fd5b52c42ffc2d02c34ff1d8c67fffc3b8291def760d3e493d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/train_8xl40.sh",
+    "source_group": "workstation",
+    "source_sha256": "ccffea19b2aa07aa8d6c23e7cef566ddebc85090afacb78b3f772f1f522cee87",
+    "published_sha256": "ccffea19b2aa07aa8d6c23e7cef566ddebc85090afacb78b3f772f1f522cee87",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud.py",
+    "source_group": "workstation",
+    "source_sha256": "5020d34108335aa1a9c44f3e95a61d825fbe0169cfbb11e439004152b6f86321",
+    "published_sha256": "5020d34108335aa1a9c44f3e95a61d825fbe0169cfbb11e439004152b6f86321",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud_check.py",
+    "source_group": "workstation",
+    "source_sha256": "5e1c192a87a8c4a3180953fbc4e1a2426e325de6c68945302fba43f121ffd89c",
+    "published_sha256": "5e1c192a87a8c4a3180953fbc4e1a2426e325de6c68945302fba43f121ffd89c",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/convert.py",
+    "source_group": "workstation",
+    "source_sha256": "be7dc27d07c840a38cf50da0a8e63e97d1034e512dbd28e4ed9b14fcee1d7d20",
+    "published_sha256": "be7dc27d07c840a38cf50da0a8e63e97d1034e512dbd28e4ed9b14fcee1d7d20",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/dex1_modality.py",
+    "source_group": "workstation",
+    "source_sha256": "b0001b63304ac5fdf52f50b39d42d772b649d64a92f1d08973e23b8b25f0dce4",
+    "published_sha256": "b0001b63304ac5fdf52f50b39d42d772b649d64a92f1d08973e23b8b25f0dce4",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/download_base.py",
+    "source_group": "workstation",
+    "source_sha256": "7a5e29d3f8941fd7bb91878fa898daeab95d761f01ea14bdcd3a0a1e16aa92da",
+    "published_sha256": "7a5e29d3f8941fd7bb91878fa898daeab95d761f01ea14bdcd3a0a1e16aa92da",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/groot_entry.py",
+    "source_group": "workstation",
+    "source_sha256": "b5fca00e661e217cd39c18f6b950824aca98af8f9a2bb91bc3ba60137e849554",
+    "published_sha256": "b5fca00e661e217cd39c18f6b950824aca98af8f9a2bb91bc3ba60137e849554",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/inference_contract.py",
+    "source_group": "workstation",
+    "source_sha256": "c2323d549b75fb8f7a9a00f083a3a39e445711543fe04883fcef6bf3df4de7a6",
+    "published_sha256": "c2323d549b75fb8f7a9a00f083a3a39e445711543fe04883fcef6bf3df4de7a6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/local_workflow.py",
+    "source_group": "workstation",
+    "source_sha256": "e627cb0ae3dc3f765cd407a76fb180871ebae90aaea1489ace63550a50a905e6",
+    "published_sha256": "e627cb0ae3dc3f765cd407a76fb180871ebae90aaea1489ace63550a50a905e6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/manifest.py",
+    "source_group": "workstation",
+    "source_sha256": "cebc39238efc85656ddf84ecf8b4782679a94d007deb6ce0bb7da9cc4f3c89d6",
+    "published_sha256": "cebc39238efc85656ddf84ecf8b4782679a94d007deb6ce0bb7da9cc4f3c89d6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/policy_guard.py",
+    "source_group": "workstation",
+    "source_sha256": "e73f05a194acc0c7247a6eafe56fa7ea6de3b86b7950d9887e4684c120b876b7",
+    "published_sha256": "e73f05a194acc0c7247a6eafe56fa7ea6de3b86b7950d9887e4684c120b876b7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/remote.py",
+    "source_group": "workstation",
+    "source_sha256": "4a5a8c757010acc6873c261b87543095c442f6f0d2b706ee2a46f90d2bfbbb23",
+    "published_sha256": "82841eb1c0861f55323654ec41f819c4962bb9071c3c6e2e53d24886b424ac76",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "sonic_pipeline/review_page.py",
+    "source_group": "workstation",
+    "source_sha256": "6a60d3d76b7204c9701e1c1a6beaf221701e55888010bdbed830263d93ced755",
+    "published_sha256": "6a60d3d76b7204c9701e1c1a6beaf221701e55888010bdbed830263d93ced755",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/runner.py",
+    "source_group": "workstation",
+    "source_sha256": "30fd83044c5682451297b3206fad27a9c89b6e93fe53d7e859cc420ef8ace4c2",
+    "published_sha256": "30fd83044c5682451297b3206fad27a9c89b6e93fe53d7e859cc420ef8ace4c2",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/settings.py",
+    "source_group": "workstation",
+    "source_sha256": "c1c8b9389536902acda53b9790c62829aa17050dc69660f3c6ef7042561a7ec4",
+    "published_sha256": "97fc40b33a664837501155e6230a426213064ce0004b8b81f1b98dc55a82b3e2",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "sonic_pipeline/sync_raw.py",
+    "source_group": "workstation",
+    "source_sha256": "49111e9969d6f6294ce5649530dc36518eacd5079974b5c47640450f49c5cbc5",
+    "published_sha256": "49111e9969d6f6294ce5649530dc36518eacd5079974b5c47640450f49c5cbc5",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/tests/check_dataset_validation.py",
+    "source_group": "workstation",
+    "source_sha256": "9ce932ebc721bc8c5756ec5a9d93813cce9c19b7881fb7cdefea625f8e446a33",
+    "published_sha256": "9ce932ebc721bc8c5756ec5a9d93813cce9c19b7881fb7cdefea625f8e446a33",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/tests/test_contracts.py",
+    "source_group": "workstation",
+    "source_sha256": "b38254adc9dac4a6f48b81096451cae5a7d9fd6da1a80ebc394ea7605fc1bbf5",
+    "published_sha256": "b38254adc9dac4a6f48b81096451cae5a7d9fd6da1a80ebc394ea7605fc1bbf5",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/tests/test_local_workflow.py",
+    "source_group": "workstation",
+    "source_sha256": "44a25d188d44d34713c24a76265cb28d04ba626f5522881c95862edf70a3d327",
+    "published_sha256": "44a25d188d44d34713c24a76265cb28d04ba626f5522881c95862edf70a3d327",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/training_entry.py",
+    "source_group": "workstation",
+    "source_sha256": "8ef3a829b575b85e7aee7c6c268b6c9afacacc9aada72cdb5c2efea2cb1f60e1",
+    "published_sha256": "8ef3a829b575b85e7aee7c6c268b6c9afacacc9aada72cdb5c2efea2cb1f60e1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/upload_dataset.py",
+    "source_group": "workstation",
+    "source_sha256": "36548fdaa6566d9f185adc8c82341b0ed9abe6a4496dc7cfa68ad14aabef833c",
+    "published_sha256": "36548fdaa6566d9f185adc8c82341b0ed9abe6a4496dc7cfa68ad14aabef833c",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/validate_dataset.py",
+    "source_group": "workstation",
+    "source_sha256": "facccb29491b3785f16a621d393b58d933663815c1cd2479cc3b10a8d830d35f",
+    "published_sha256": "facccb29491b3785f16a621d393b58d933663815c1cd2479cc3b10a8d830d35f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/g1_readonly_preflight.sh",
+    "source_group": "workstation",
+    "source_sha256": "19deafcf60cc5a62388db390ae12410e155bd90cfd6a4fff52372cc97e950dc3",
+    "published_sha256": "19deafcf60cc5a62388db390ae12410e155bd90cfd6a4fff52372cc97e950dc3",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/observe_sonic_local.py",
+    "source_group": "workstation",
+    "source_sha256": "b1684e63248fd586cbe49de0860694182615a5514b45073ecdaad69135080ebe",
+    "published_sha256": "b1684e63248fd586cbe49de0860694182615a5514b45073ecdaad69135080ebe",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/pico_readonly_probe.py",
+    "source_group": "workstation",
+    "source_sha256": "b02cc3f7307e16dc9588909337e337c0eb1e8906ad9d108211279279c06bf2d6",
+    "published_sha256": "b02cc3f7307e16dc9588909337e337c0eb1e8906ad9d108211279279c06bf2d6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/se3_rotation_experiment.py",
+    "source_group": "workstation",
+    "source_sha256": "85352668b4d7242bde15277feb7e90323e43719969434d639b23029d9ccfba2f",
+    "published_sha256": "7a1f5899374f33902ac086aabcb12363162312fb5c70d70e56abefbfe3bd442c",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "scripts/test_body_freshness.py",
+    "source_group": "workstation",
+    "source_sha256": "322d9dcbb6ce073f0d0448b3ca668f9771b4d202dc9c5abe499a5192b5eab2a7",
+    "published_sha256": "322d9dcbb6ce073f0d0448b3ca668f9771b4d202dc9c5abe499a5192b5eab2a7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/test_pico_reader.py",
+    "source_group": "workstation",
+    "source_sha256": "41b04180961ce259fb67af121dc427a6e1e4d163e1c650ca0b343a6418d2f906",
+    "published_sha256": "41b04180961ce259fb67af121dc427a6e1e4d163e1c650ca0b343a6418d2f906",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/test_swing_twist.py",
+    "source_group": "workstation",
+    "source_sha256": "bdf36f970eff99e7f45ea3a837b3335bfe27d87bcab98d66876b85156504741e",
+    "published_sha256": "bdf36f970eff99e7f45ea3a837b3335bfe27d87bcab98d66876b85156504741e",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/test_xrt_runtime.py",
+    "source_group": "workstation",
+    "source_sha256": "c4ecc87152af57bf0f6229b913d9815cfb29863fb8b957ef3431a03ad5d093d6",
+    "published_sha256": "c4ecc87152af57bf0f6229b913d9815cfb29863fb8b957ef3431a03ad5d093d6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "scripts/verify_smpl_offline.py",
+    "source_group": "workstation",
+    "source_sha256": "8c10329154e01019f3ad22ced94a104d8db5b0e64bd44efa46f231d86920fbad",
+    "published_sha256": "e4327443cd0f75b7c7124619704bc5a3fe23ee8bb6c94fe402cffb84bfb3117c",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "scripts/verify_zmq_nonmotion.py",
+    "source_group": "workstation",
+    "source_sha256": "431a91e73db0701018423ad9f2494af544da1d8238964960ddb941ed6e5adedc",
+    "published_sha256": "7584150de5c4491d2ceacb9ab55ac0a6e35d3bf1f9994fdad2294952cd9c700c",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/dex1_bridge.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "812f4bdd2b46a387874ff0063d880caaccbbf0dc1d28d850a11c9adcfc037239",
+    "published_sha256": "812f4bdd2b46a387874ff0063d880caaccbbf0dc1d28d850a11c9adcfc037239",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/dex1_mapping.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8c6010c6d5f2a6a621a65e95a5f0c06459023c57be98c2435561717f05b97f49",
+    "published_sha256": "8c6010c6d5f2a6a621a65e95a5f0c06459023c57be98c2435561717f05b97f49",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/dex1_single_probe.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "30c981ace288ba1d5eded28d8b74981f6baffe540396f6b479c5068c84f795ef",
+    "published_sha256": "30c981ace288ba1d5eded28d8b74981f6baffe540396f6b479c5068c84f795ef",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/dex1_transport.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "bbdac7599983dd54c55ef1981008329adb320b927de094e36fda0484438c90d1",
+    "published_sha256": "bbdac7599983dd54c55ef1981008329adb320b927de094e36fda0484438c90d1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/motion_handoff.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "e5f864b58927a89a9e4a8503e2543d2bdf6ca5b49d14a1e46e5fe33295639c1e",
+    "published_sha256": "e5f864b58927a89a9e4a8503e2543d2bdf6ca5b49d14a1e46e5fe33295639c1e",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/run_real_teleop.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "a06f1edb5533b7d95158bacc43bd87c0fcaadff3ea4abbb2752e24317257f366",
+    "published_sha256": "a06f1edb5533b7d95158bacc43bd87c0fcaadff3ea4abbb2752e24317257f366",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/session_observer.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4ed509a865d9c012314bbdde8ca61f4ddea6b51c5fb57a1c7453b8161f0606c8",
+    "published_sha256": "4ed509a865d9c012314bbdde8ca61f4ddea6b51c5fb57a1c7453b8161f0606c8",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/startup_status.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "a9f317b7bfdc943ae1667c434ea80103f62bbd7d49e5d70852ba7771a0c31f4d",
+    "published_sha256": "a9f317b7bfdc943ae1667c434ea80103f62bbd7d49e5d70852ba7771a0c31f4d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/streamer.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "1ac3a21c4bb80835304ace1dc3055d4010131497bd89ea966679de05439d27c7",
+    "published_sha256": "1ac3a21c4bb80835304ace1dc3055d4010131497bd89ea966679de05439d27c7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/thermal_monitor.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "2848ae2b226ae356cbeb6abef08380f5c1f19bdbfdfdc3261e5546869cfd9643",
+    "published_sha256": "2848ae2b226ae356cbeb6abef08380f5c1f19bdbfdfdc3261e5546869cfd9643",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/unitree_dex1.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "3026c65948936cb9eba9fbbc48760bbc175e4a963e6ab10058691a131788079d",
+    "published_sha256": "3026c65948936cb9eba9fbbc48760bbc175e4a963e6ab10058691a131788079d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/build_model.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "7ee7db07d44f8979a27b3dd5fddc7791ec67fdc1771fdd9c33289f122f85b003",
+    "published_sha256": "7ee7db07d44f8979a27b3dd5fddc7791ec67fdc1771fdd9c33289f122f85b003",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/core.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "535ad9d4f4d3890db0866657364f550e4a3e1c727e846f80e0fa2324b6825bfa",
+    "published_sha256": "535ad9d4f4d3890db0866657364f550e4a3e1c727e846f80e0fa2324b6825bfa",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/demo.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "dacdd0579bdfff9192460c4ba28684e6900d3bb8b8c72b8689ff881531b0ebb0",
+    "published_sha256": "dacdd0579bdfff9192460c4ba28684e6900d3bb8b8c72b8689ff881531b0ebb0",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/gripper.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "bbe176610529f725a9102055f754cdcc3196b0a0c22063a98585ee3132769fee",
+    "published_sha256": "bbe176610529f725a9102055f754cdcc3196b0a0c22063a98585ee3132769fee",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/launcher.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4686a2a089be69ca411d6a4353830a2af1dbc41ebe90e91d104cae83b5d4baf9",
+    "published_sha256": "02e747893512ad2e4d493e6787dfb5a139e6758a0b710633b34461a7f0da6e3e",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/offline_replay/panel.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "c28697f34622a3b81af9374608fe53c21141b5fc5a65a93e048dde79ecef22d1",
+    "published_sha256": "c28697f34622a3b81af9374608fe53c21141b5fc5a65a93e048dde79ecef22d1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/server.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "83e2ec84ebe0a2c73a044de76e5c7c63289b1655bdffd33944df923ec4c1ab69",
+    "published_sha256": "83e2ec84ebe0a2c73a044de76e5c7c63289b1655bdffd33944df923ec4c1ab69",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/validate_model.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "e9dcde6be73d9796c900a5d54ca342b7faf46b8deacdb85e9055a2ae997847a7",
+    "published_sha256": "e9dcde6be73d9796c900a5d54ca342b7faf46b8deacdb85e9055a2ae997847a7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/tests/test_core.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "cfd8f6229230ce90991d13f9dc43c3bfbbf51350e90ac53f334f20f26e75092c",
+    "published_sha256": "b13de7a90698ea3c80f9d2699f0774b34c0f47cc94a79667ffef23c80b2815a7",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/offline_replay/tests/test_gripper.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "053b766e632746b570fd0df5d529ace555db6c25e0d1c86a07e1e57d712ed114",
+    "published_sha256": "053b766e632746b570fd0df5d529ace555db6c25e0d1c86a07e1e57d712ed114",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/tests/test_process.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "c42dbf59a6fb45652c4686fd40e8e0983a14f45d17924df13481f647545f5dc1",
+    "published_sha256": "c42dbf59a6fb45652c4686fd40e8e0983a14f45d17924df13481f647545f5dc1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/analyze_session.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "3aa674099d0c705c69f943df0c78a255ce3896d6017f269bc5d3889a481f3adf",
+    "published_sha256": "3aa674099d0c705c69f943df0c78a255ce3896d6017f269bc5d3889a481f3adf",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/atomic_streamer.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "cc65f875a8314bd05191e8ded310582d057acaebae34fb5dc97b510d11cdbb4f",
+    "published_sha256": "cc65f875a8314bd05191e8ded310582d057acaebae34fb5dc97b510d11cdbb4f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/capture_metrics.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f0edab1945bc5c077a0e3d7a3d835769b840ea6a1ec66cdd0fb27e02a01ab26a",
+    "published_sha256": "f0edab1945bc5c077a0e3d7a3d835769b840ea6a1ec66cdd0fb27e02a01ab26a",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/dds_monitor.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "2a3b7da1788ce024841548885ebd73a59f57f27987b23b2597662e45a593ca8f",
+    "published_sha256": "2a3b7da1788ce024841548885ebd73a59f57f27987b23b2597662e45a593ca8f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/packet_reader.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "bcecfb07309089789d71bb16c6b320b88706374c67ffb05116d5364cf40287bd",
+    "published_sha256": "bcecfb07309089789d71bb16c6b320b88706374c67ffb05116d5364cf40287bd",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/probe.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "2be88fbd48113c38f09238b8bb7d57328189354aa2c2dc482c2acf9b09aee4e7",
+    "published_sha256": "2be88fbd48113c38f09238b8bb7d57328189354aa2c2dc482c2acf9b09aee4e7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/process_reader.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "c2cd23fdde03f362b888c856d12ce9fae63f44e92e4a789e517873ef2a27a6e9",
+    "published_sha256": "c2cd23fdde03f362b888c856d12ce9fae63f44e92e4a789e517873ef2a27a6e9",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/raw_probe.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "3947e5f5c84e66d59c1cc5ead91dd09dbdc032b2178d1745744542e8dcacaa26",
+    "published_sha256": "3947e5f5c84e66d59c1cc5ead91dd09dbdc032b2178d1745744542e8dcacaa26",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/runner.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "2a99fb1c7dd0496fa123abea7405737eb4247846bfa490b5f2bfdc0f4c8831cf",
+    "published_sha256": "2a99fb1c7dd0496fa123abea7405737eb4247846bfa490b5f2bfdc0f4c8831cf",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/safety.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8530214baac976579d0721120f480e6427ed329c36a482629f354601a937f033",
+    "published_sha256": "8530214baac976579d0721120f480e6427ed329c36a482629f354601a937f033",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/sdk_relay.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "7c33e66104a228eef52d52ec15f6e4b963e479081ae45a5503d2749538f20952",
+    "published_sha256": "7c33e66104a228eef52d52ec15f6e4b963e479081ae45a5503d2749538f20952",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/sim_loop.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "c8b879073b300ec870c21990a4bbd01244704861c77edf1a2f70bf2a40d4c6b8",
+    "published_sha256": "c8b879073b300ec870c21990a4bbd01244704861c77edf1a2f70bf2a40d4c6b8",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/telemetry.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "d68c08d66264bbd1f05e939a89980222223bbf6cda8ae5f5c6eade98a59c1ba1",
+    "published_sha256": "d68c08d66264bbd1f05e939a89980222223bbf6cda8ae5f5c6eade98a59c1ba1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/tests/test_mapping.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "fc2570b130f7b888eedf4db4ae3dce553a7170e4729709338304d77964d4fc22",
+    "published_sha256": "fc2570b130f7b888eedf4db4ae3dce553a7170e4729709338304d77964d4fc22",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/tests/test_packet_gate.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "1cfbfe15fa85a0f7201df192d91c33038c8afed2741faa4a700dfee71e8848e4",
+    "published_sha256": "1cfbfe15fa85a0f7201df192d91c33038c8afed2741faa4a700dfee71e8848e4",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/tests/test_pose_watchdog.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ab590c0e67535761df37d4a99f0324db788d2346728dbad39ddb7104ad240eee",
+    "published_sha256": "ab590c0e67535761df37d4a99f0324db788d2346728dbad39ddb7104ad240eee",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/tests/test_process_reader.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "33eff031e450d34b614f2c11d8094b611b970b6529908669168ceb5711328dc7",
+    "published_sha256": "33eff031e450d34b614f2c11d8094b611b970b6529908669168ceb5711328dc7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/sim_teleop/tests/test_safety.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "c53a962053e2ca2b180d923632fa088ac9a6df4b64b81f98fd16aa1dea2d0887",
+    "published_sha256": "c53a962053e2ca2b180d923632fa088ac9a6df4b64b81f98fd16aa1dea2d0887",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/app.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "d7ac6b3ca4a75f996dbd99e3d5b6117bf8c1f4c34b3c47b2f5b6300d85982a8e",
+    "published_sha256": "eaf5832b9450490c39b42c3c8107316d6ead442a3b9315590f851d40b5a63274",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/console/backend.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "d717b08f85529665080c95825fa53c4841f4b26e5f81cfce752791c50754f81f",
+    "published_sha256": "72d21052441277922a7a55b73333dc0c2ad737b2b6da15c17b06630cefe258a7",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/console/camera_autostart.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ec2737d7b9fec6e8e007f7f290b7d2b2d490f52b79a67937985202e59351315c",
+    "published_sha256": "ec2737d7b9fec6e8e007f7f290b7d2b2d490f52b79a67937985202e59351315c",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/camera_preview.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "1f92f6f8c8323f3c6e84f073cd3ec3006052ba88c73b476a31e4c16081c973ab",
+    "published_sha256": "1f92f6f8c8323f3c6e84f073cd3ec3006052ba88c73b476a31e4c16081c973ab",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/data_manager.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4e5b5afd429a78dfcf92a44dc487439309f511e05f61aa04e9c2a0ec4d237719",
+    "published_sha256": "4e5b5afd429a78dfcf92a44dc487439309f511e05f61aa04e9c2a0ec4d237719",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/ensure_camera.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f79cc20ca1c0c050da64f0463056ce8c30e05ce79a2822faf4be842a4531adc9",
+    "published_sha256": "9b8f7c726d01483c6280c0fb802238786aaabd0033872c703b3fcf9cc97c5fdf",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/console/episode_panel.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "9df76126c6ca7819d9c44c9260eba187f270c5e3cfdc27518e386eb2aeddd5c1",
+    "published_sha256": "9df76126c6ca7819d9c44c9260eba187f270c5e3cfdc27518e386eb2aeddd5c1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/export_capture.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "36ccdc07abee5fe15b757db894601bed138c5c1dd0906310b546b0dce0e50827",
+    "published_sha256": "36ccdc07abee5fe15b757db894601bed138c5c1dd0906310b546b0dce0e50827",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/hardware.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "e6a78dc5abcaca04a505273a9f355c950e8bf340bf4a73b3a3b937defd6d2e57",
+    "published_sha256": "e6a78dc5abcaca04a505273a9f355c950e8bf340bf4a73b3a3b937defd6d2e57",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/remote_inventory.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "bb6046c1d32631b0a7b3fb59ff00d470037290d2a01497599a86a3643048cea9",
+    "published_sha256": "bb6046c1d32631b0a7b3fb59ff00d470037290d2a01497599a86a3643048cea9",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/remote_prepare.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "b4d58b031ce333cf99af658f2691d8d3fffcc88ae14755ed151bc0b7cb8d4f09",
+    "published_sha256": "b4d58b031ce333cf99af658f2691d8d3fffcc88ae14755ed151bc0b7cb8d4f09",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/selfcheck.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "45215021215a927b97f08a740ec6db39b3d6726454db8042a275742e6e97a325",
+    "published_sha256": "45215021215a927b97f08a740ec6db39b3d6726454db8042a275742e6e97a325",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/ssh_connection.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "13f37f04aeb2da9a94c0196eb03c5537a65703c8bad1cd3bde36b67e0b0444e0",
+    "published_sha256": "13f37f04aeb2da9a94c0196eb03c5537a65703c8bad1cd3bde36b67e0b0444e0",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_backend.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "0d777274f387383b7d4fd9844fa8654dc010598c9bdab30f20d01acf3a62d4a0",
+    "published_sha256": "0d777274f387383b7d4fd9844fa8654dc010598c9bdab30f20d01acf3a62d4a0",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_camera_assembly.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "1aadbec29355e9744d131fb6c5e144c6376335e079f96d53f7e4c8e5b0137774",
+    "published_sha256": "1aadbec29355e9744d131fb6c5e144c6376335e079f96d53f7e4c8e5b0137774",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_camera_autostart.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f36b32a1fe16386199561b22c746aaa362221f6e866978105da58c572f25c035",
+    "published_sha256": "f36b32a1fe16386199561b22c746aaa362221f6e866978105da58c572f25c035",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_camera_launch.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8c969f2adeca3fab533a0132e0f60c74895a77c5efdfbfa54b90cbdcb7b076cb",
+    "published_sha256": "8c969f2adeca3fab533a0132e0f60c74895a77c5efdfbfa54b90cbdcb7b076cb",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_console_log_filter.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "b65f0ae8475034a0a0b004e0e38dde4a53c098836503e55609bd7d43870f1481",
+    "published_sha256": "b65f0ae8475034a0a0b004e0e38dde4a53c098836503e55609bd7d43870f1481",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_dds_gate.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "0058e06d449895af4245f38494f00d4bb2472784a351e05e995ec2512b70405f",
+    "published_sha256": "0058e06d449895af4245f38494f00d4bb2472784a351e05e995ec2512b70405f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_desktop_pico_ready.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "5b3e6e2cfa0cf10ebe916845cd4817c8d52164d0c68eccfb400036d8fe3e2b23",
+    "published_sha256": "5b3e6e2cfa0cf10ebe916845cd4817c8d52164d0c68eccfb400036d8fe3e2b23",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_dex1_mapping.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "cf20b6507993a21bb0f69664106dfe0935644956a6a135d6707bcc7645025de7",
+    "published_sha256": "cf20b6507993a21bb0f69664106dfe0935644956a6a135d6707bcc7645025de7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_dex1_readiness.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "e8e4440e7883476fe90a2c7f7f37db7e2f89986d9ac9350f60faee268c1debab",
+    "published_sha256": "e8e4440e7883476fe90a2c7f7f37db7e2f89986d9ac9350f60faee268c1debab",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_dex1_restore_guard.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "cba353f9b60e0d5abb1b9b844c167a5d9d21eed26b24a2bdd90984f42911cbcd",
+    "published_sha256": "cba353f9b60e0d5abb1b9b844c167a5d9d21eed26b24a2bdd90984f42911cbcd",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_dex1_transport.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "bed6c67928c51e7bb6a280fe3f91d137952f5de1223cde62cdaa55c9f6e4223b",
+    "published_sha256": "bed6c67928c51e7bb6a280fe3f91d137952f5de1223cde62cdaa55c9f6e4223b",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_export_capture.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "26b6322d7ded26ac11c192554421301f339700ec37aa3017724b626b52765ace",
+    "published_sha256": "26b6322d7ded26ac11c192554421301f339700ec37aa3017724b626b52765ace",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_gripper_routes.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8001067d0b9f627faf9e7e61589a593ffa82fda1a634413c9bab0a336986ee8f",
+    "published_sha256": "8001067d0b9f627faf9e7e61589a593ffa82fda1a634413c9bab0a336986ee8f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_hardware.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ad5697133b78e7dbbc6fb582ab99b85b0ace82b7c16cc23ff219336f06faa0ac",
+    "published_sha256": "ad5697133b78e7dbbc6fb582ab99b85b0ace82b7c16cc23ff219336f06faa0ac",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_model_contract.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "1948ebcfc7fb7393a1e5511e11969bd44a55c1c7645134061ed3d7fcc214c9d0",
+    "published_sha256": "1948ebcfc7fb7393a1e5511e11969bd44a55c1c7645134061ed3d7fcc214c9d0",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_motion_handoff.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f0e592df1a99984ced79289a75440fff4bcf70578ba57d642f044075f8de3ad2",
+    "published_sha256": "f0e592df1a99984ced79289a75440fff4bcf70578ba57d642f044075f8de3ad2",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_real_entry.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "6086932bb41df3f5ffbe4af09c70b03dd223700ad29a62b6b28ae066be84b1ec",
+    "published_sha256": "6086932bb41df3f5ffbe4af09c70b03dd223700ad29a62b6b28ae066be84b1ec",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_realsense_config.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "60db0c29bf7cea018973e95f764a442d8a0ea6457e4fbd35f13e1c1019d4525b",
+    "published_sha256": "60db0c29bf7cea018973e95f764a442d8a0ea6457e4fbd35f13e1c1019d4525b",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_ssh_connection.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f278d1dcb2491b3c3ddccfa0f0711cba533b20a6518814505ebaa23475d5acda",
+    "published_sha256": "f278d1dcb2491b3c3ddccfa0f0711cba533b20a6518814505ebaa23475d5acda",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_startup_dependencies.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "3553a3b7837db37fb6e4aeeec493ee05ad1b91724238edcc7aeed392f419d102",
+    "published_sha256": "3553a3b7837db37fb6e4aeeec493ee05ad1b91724238edcc7aeed392f419d102",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_startup_status.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "2fbf8bec53b5f24711c20adaccc0dc39419ad166418d1f5d5a767ac448fc0b85",
+    "published_sha256": "2fbf8bec53b5f24711c20adaccc0dc39419ad166418d1f5d5a767ac448fc0b85",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_startup_ui.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "3961aff555cee5ac0780e7b749e561f1ee3ce48a92236627cd36f1af05b66b03",
+    "published_sha256": "3961aff555cee5ac0780e7b749e561f1ee3ce48a92236627cd36f1af05b66b03",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_thermal_hold.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "a6013eed99e302267e5d74aa4cc4a2edd359f0069ed67a55780241b7dd892f3c",
+    "published_sha256": "a6013eed99e302267e5d74aa4cc4a2edd359f0069ed67a55780241b7dd892f3c",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_thermal_monitor.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "a70d98d862753adb04cc04ad6d28dfaad381b74cd33bac1d24a4ff9ffb94cd4f",
+    "published_sha256": "a70d98d862753adb04cc04ad6d28dfaad381b74cd33bac1d24a4ff9ffb94cd4f",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_trigger_snapshot.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "5b2f35142abe658bf2d27e8674b58da23551e1f495ee38e723ee54b5d79fd202",
+    "published_sha256": "5b2f35142abe658bf2d27e8674b58da23551e1f495ee38e723ee54b5d79fd202",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/console/tests/test_unitree_loop.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "69f632d0860ffb18feeff49d08f08b4ad2bc5f5cc619273f0ad5539d708bf9ff",
+    "published_sha256": "69f632d0860ffb18feeff49d08f08b4ad2bc5f5cc619273f0ad5539d708bf9ff",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/viewer.html",
+    "source_group": "wbc-overlay",
+    "source_sha256": "63aa6330be36fe4fe8d41876bd05f226a608332c61ff65069aaf167ef2fa210c",
+    "published_sha256": "63aa6330be36fe4fe8d41876bd05f226a608332c61ff65069aaf167ef2fa210c",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/model_config.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "d952775c85539447f323bb1afa9785577517bc8322db9971c51efb6a84d256d6",
+    "published_sha256": "d952775c85539447f323bb1afa9785577517bc8322db9971c51efb6a84d256d6",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/offline_replay/source-contract.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ca8a158cd154dcb1b6372faf5bfbb3abde7448de11041b283d64b3a5c2e188f4",
+    "published_sha256": "ca8a158cd154dcb1b6372faf5bfbb3abde7448de11041b283d64b3a5c2e188f4",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "references/dex1-replay-assets.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "7aa6fe6a3b9b1d49b253918e6ace50a32c961fa1d83c4227a4b97e6ff067d317",
+    "published_sha256": "7aa6fe6a3b9b1d49b253918e6ace50a32c961fa1d83c4227a4b97e6ff067d317",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/dex1-hardware.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8ec3aeb6ca1cfa9ebe5eab8dcf329a7f93109b7c6509ea060ac538a2313bed31",
+    "published_sha256": "27f43a103c1bd288ca470678d78f0fdfb761e7a5c0c9f9f60bff228110e9eded",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/profiles/dex1-upstream-lock.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ef6272a980215b5d49e45455835965a98de17706cc71a963e88bc31dddec073b",
+    "published_sha256": "ef6272a980215b5d49e45455835965a98de17706cc71a963e88bc31dddec073b",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/camera-roles.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "7a12bfb5b1e466ba660d9c882326be1cc02193e6fae9a5ee9956455da1b2d822",
+    "published_sha256": "12a54b2a799ac944257a0907ad8fb5273a1b6c74c4de7c0838c37e60244af990",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "wbc/official_sonic/profiles/passive-health-poll.json",
+    "source_group": "wbc-overlay",
+    "source_sha256": "32718c63d38e73a023612232a4ee530725aeb9991bc013d2765955dc58d23033",
+    "published_sha256": "32718c63d38e73a023612232a4ee530725aeb9991bc013d2765955dc58d23033",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/exporter.args",
+    "source_group": "wbc-overlay",
+    "source_sha256": "cae9675ef5eaf53e17a3041e54e22565cf79e519bad4516728ffeadc34f4266a",
+    "published_sha256": "cae9675ef5eaf53e17a3041e54e22565cf79e519bad4516728ffeadc34f4266a",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/orin-controller.args",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8ae4bf0d923bbdca73c457cb7aa4c206fe492e57b385d84106611fbed59c14ca",
+    "published_sha256": "8ae4bf0d923bbdca73c457cb7aa4c206fe492e57b385d84106611fbed59c14ca",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/pico.args",
+    "source_group": "wbc-overlay",
+    "source_sha256": "6146f87ef6d861ecf70711e5c931a3c361a392e42454ec5304d9d74c04967697",
+    "published_sha256": "6146f87ef6d861ecf70711e5c931a3c361a392e42454ec5304d9d74c04967697",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/profiles/workstation-all-in-one.args",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f69ec7defda1105c3ad7496107baf81f8e8b7568d4993739bda48ed55ce95074",
+    "published_sha256": "f69ec7defda1105c3ad7496107baf81f8e8b7568d4993739bda48ed55ce95074",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/vendor/xr_teleoperate/teleop/robot_control/robot_hand_unitree.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4ee8bd44e9512fb29f20113728e1cf3eebd077652b8540e62f8fd11943cfc034",
+    "published_sha256": "4ee8bd44e9512fb29f20113728e1cf3eebd077652b8540e62f8fd11943cfc034",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/vendor/xr_teleoperate/teleop/utils/weighted_moving_filter.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "48d914f37de405351d327b9712a36c013f8375d550258fecbdd37997e526308b",
+    "published_sha256": "48d914f37de405351d327b9712a36c013f8375d550258fecbdd37997e526308b",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/official_sonic/vendor/xr_teleoperate/LICENSE.upstream",
+    "source_group": "wbc-overlay",
+    "source_sha256": "63762ccebdb836cf2bae6b1ae0de526e7499dbf45e554c790ebc45942cce3e36",
+    "published_sha256": "63762ccebdb836cf2bae6b1ae0de526e7499dbf45e554c790ebc45942cce3e36",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "references/voice-model.json",
+    "source_group": "workstation",
+    "source_sha256": "968a4329cb15e58f76757a445e448be80f2f4b30976faeb9fc2aae6ca2eb8442",
+    "published_sha256": "968a4329cb15e58f76757a445e448be80f2f4b30976faeb9fc2aae6ca2eb8442",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/start_real_teleop.sh",
+    "source_group": "wbc-overlay",
+    "source_sha256": "8a8c9378980f3a44f780c940bd6279d2be7390c1720452e9afad375771a1ab68",
+    "published_sha256": "8a8c9378980f3a44f780c940bd6279d2be7390c1720452e9afad375771a1ab68",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/start_sim_teleop.sh",
+    "source_group": "wbc-overlay",
+    "source_sha256": "fec1ca09fc2e11be8702cb0e18d62fa639ff5428f1c4494d7034976abca75bde",
+    "published_sha256": "fec1ca09fc2e11be8702cb0e18d62fa639ff5428f1c4494d7034976abca75bde",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/status_sim_teleop.sh",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4ca47a2227082b531aa5ad4faa08876fdf633b94c17a05ed894a027a02917bc4",
+    "published_sha256": "4ca47a2227082b531aa5ad4faa08876fdf633b94c17a05ed894a027a02917bc4",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/stop_sim_teleop.sh",
+    "source_group": "wbc-overlay",
+    "source_sha256": "073a5b202b55b3fcbba69f82ca31d4b512ddde03553179cfe8e63267b839ffd1",
+    "published_sha256": "073a5b202b55b3fcbba69f82ca31d4b512ddde03553179cfe8e63267b839ffd1",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/check_sim_safety.sh",
+    "source_group": "wbc-overlay",
+    "source_sha256": "13855d1bc2120f86d3ebf8e8f37b7e0e5db44d9bfa05905d24ff42928c60ca7e",
+    "published_sha256": "13855d1bc2120f86d3ebf8e8f37b7e0e5db44d9bfa05905d24ff42928c60ca7e",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/gear_sonic/utils/teleop/body_freshness.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "f860ca62b527295b0dff247b4470d682037ecc216acc4bdf0df7b763da3d6212",
+    "published_sha256": "f860ca62b527295b0dff247b4470d682037ecc216acc4bdf0df7b763da3d6212",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/gear_sonic/utils/teleop/xrt_runtime.py",
+    "source_group": "wbc-overlay",
+    "source_sha256": "73b1b2df1ed1f93f3508835275ee8dc7f94052623c5e2f993665d2fed40f6197",
+    "published_sha256": "73b1b2df1ed1f93f3508835275ee8dc7f94052623c5e2f993665d2fed40f6197",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "wbc/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/sim_only_guard.hpp",
+    "source_group": "wbc-overlay",
+    "source_sha256": "d40a30ea0c8da5a12cb10706648c1cbaa50f876e9852c2c0aaa17b8d90ce9aa7",
+    "published_sha256": "d40a30ea0c8da5a12cb10706648c1cbaa50f876e9852c2c0aaa17b8d90ce9aa7",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "config/workflow-contract.example.json",
+    "source_group": "workstation",
+    "source_sha256": "c5a89cfc23dc518d6d137aa82b611c45eb3821d6d88327c17fbcade5dd0fb32c",
+    "published_sha256": "a316592f6df462d1d3212eba75cc2598f1829e50a4f092261ad9e0456fadb609",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/capture-README.zh-CN.md",
+    "source_group": "workstation",
+    "source_sha256": "96ed8a5ef4b4505c2865f26f9f05fd0488267c80f68e140803704bef4e680504",
+    "published_sha256": "8354c02ae8ecd04c392221f58d0a79bea221a78f9935520ac08ee6fdaf4ccfbe",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/sonic_pipeline-README.zh-CN.md",
+    "source_group": "workstation",
+    "source_sha256": "0382ee89d1b6c16db465b9f34fcf89ee971ab596a23aaa3316037d75be166d94",
+    "published_sha256": "f75febf08b43c25643db0929547b6f9b85eca53c908dbfdc2f5d2edad7d5aee4",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/official_sonic-README.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "ff86f6fe5d1dea34d1d6c823ae58bb5b050d93eb2d4e29972340ccba1da21bdc",
+    "published_sha256": "e92597e8d8269c57c70e09bcd7605635eb3e3a802bd7ae952a011c014f1dd2c6",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/official_sonic-console-README.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "fad39992351831cb36012b55c5970017ec0f00bedbd886b7652b7017663237fc",
+    "published_sha256": "65b488920196eeaabd2f81fb0e8644e4c0efe18dc0235d34810b8c60827fc29b",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/offline_replay-README.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "b3f4c5542531a6385227a793d3ef783ac40b85eb9357cbe32946885599a0d55a",
+    "published_sha256": "4b04a2994ab5ec72305a8267c2df5f1c03172ab5763c2894303fbff4e21eee9d",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/sim_teleop-README.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "20c32c70584faac14b1cea2334b76c139019f17d8ab3339e6d9fd5195863dc60",
+    "published_sha256": "1e8a6a8e40d74f38bcbe1a422c76cfd45f44609e64dd2191ff47d71c3cef63b3",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/DEX1映射说明.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "9fc857ffc0d3b0b300e749f947173744ede774e00795e5913f80c3d49607c9e2",
+    "published_sha256": "c716d8d706021c1660db59a8c099fdf254e77dbc4d59825fd0da04e1a01aea2d",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/PICO按键速查.zh-CN.md",
+    "source_group": "wbc-overlay",
+    "source_sha256": "4e68f537bb0cecb80a75f12e9ced8448cd0e554a4acd9b977315f3d85f20a05a",
+    "published_sha256": "32dd8cdf16339da489a305439aa77b71c0e47fb0f22061780a1f3ce7064bd9aa",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/SONIC_Dex1_手柄遥操作数采与清洗_同事Codex复现说明.md",
+    "source_group": "workstation",
+    "source_sha256": "c6370c258b663aa65fef3c11941d4466818b4945fe9647efc1d7847a1dcfad1b",
+    "published_sha256": "a86d3689ef2b198a690114464ccfd87758df08b2c255ff3a7a8a90812c9a3c6c",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/SONIC工作站-功能审查与批次管理-20261028.md",
+    "source_group": "workstation",
+    "source_sha256": "6de5545fd0fba4421da2edcf5a3a0dcf050f4a77907d3da15f75d171326d9c0c",
+    "published_sha256": "311c6820cbef0b6e8dd1c2f1f3827d28f3fa04122fb2f72d712dc2592d37f688",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/夹爪最大开度与语音-20261028.md",
+    "source_group": "workstation",
+    "source_sha256": "025a7594afd64b43b10e472659e9c66dbfcd2cc46254953eeb2e0ea50bdbebdc",
+    "published_sha256": "d1af9f0bcfbd57e6077e3debc9da86a622cf7b6ac98e9280a1a8c4a337d90a37",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "docs/reference/se3_rotation_experiment.md",
+    "source_group": "workstation",
+    "source_sha256": "3e8d9c61eee014c2a5603ab3149413b9ec22e952fe80bf33102b6b4119fbd842",
+    "published_sha256": "363de13d348c38e5d291b3e46714a52cb519f2d8c67e5d4f96d9c274151734fa",
+    "transformation": "Public release: site identifiers replaced; reference docs marked historical; hardware confirmations reset; tests isolated from live locks and optional unbundled voice runtime."
+  },
+  {
+    "path": "sonic_pipeline/cloud/train_8xl40.sh",
+    "source_group": "workstation",
+    "source_sha256": "ccffea19b2aa07aa8d6c23e7cef566ddebc85090afacb78b3f772f1f522cee87",
+    "published_sha256": "ccffea19b2aa07aa8d6c23e7cef566ddebc85090afacb78b3f772f1f522cee87",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/bootstrap.sh",
+    "source_group": "workstation",
+    "source_sha256": "c50297fb463abf86cc8aee7ea79864e01ddf506931161061d72244d7edda1772",
+    "published_sha256": "c50297fb463abf86cc8aee7ea79864e01ddf506931161061d72244d7edda1772",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/download_model.sh",
+    "source_group": "workstation",
+    "source_sha256": "afacf3b7fbb9478647b3f1e192f76e2ce569b34fc8bfc29f242b8fd9898947ce",
+    "published_sha256": "afacf3b7fbb9478647b3f1e192f76e2ce569b34fc8bfc29f242b8fd9898947ce",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "sonic_pipeline/cloud/preflight_8xl40.sh",
+    "source_group": "workstation",
+    "source_sha256": "76390146546112fd5b52c42ffc2d02c34ff1d8c67fffc3b8291def760d3e493d",
+    "published_sha256": "76390146546112fd5b52c42ffc2d02c34ff1d8c67fffc3b8291def760d3e493d",
+    "transformation": "verbatim"
+  },
+  {
+    "path": "LICENSES/NVIDIA-WBC.txt",
+    "source_group": "wbc-overlay",
+    "source_sha256": "24ab66be50d1aca4fc5e029ef76ce4ceaac6557ea21665caf4b140695a76ffee",
+    "published_sha256": "24ab66be50d1aca4fc5e029ef76ce4ceaac6557ea21665caf4b140695a76ffee",
+    "transformation": "verbatim"
+  }
+]

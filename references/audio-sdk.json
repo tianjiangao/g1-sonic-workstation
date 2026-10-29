@@ -1,0 +1,12 @@
+{
+  "source": "existing accepted workstation env-tv unitree-sdk2py 1.0.1",
+  "upstream": "https://github.com/unitreerobotics/unitree_sdk2_python",
+  "license": "BSD-3-Clause",
+  "git_revision": "unavailable: installed source has no .git; exact installed bytes pinned instead",
+  "files_sha256": {
+    "unitree_sdk2py/g1/audio/g1_audio_api.py": "7ccd417ef05637617a012606dc752709674a3c9984a3828b72c9f5c453db66a8",
+    "unitree_sdk2py/g1/audio/g1_audio_client.py": "64a9942c1278b3b5badf2ae7d1b871ac785f5fd3deda9404e97088b1e9aff74b",
+    "unitree_sdk2py/g1/audio/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "unitree_sdk2py/core/channel.py": "8a58eea2bc6bb8792e5b5fa76949407bd8c2ef8af07172d1a3a465bcc544e247"
+  }
+}

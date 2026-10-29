@@ -1,0 +1,22 @@
+{
+  "wbc_commit": "7f151314d4d1606544bf249d2a7a1cb754c64582",
+  "groot_commit": "51d4c89f72fda44cbf77285c6a8114b52676b8a1",
+  "base_revision": "2fc962b973bccdd5d8ce4f67cc63b264d6886495",
+  "backbone_revision": "9ce19a195e423419c349abfc86fd07178b230561",
+  "state_dim": 34,
+  "action_dim": 66,
+  "action_horizon": 40,
+  "motion_token_dim": 64,
+  "action_grid_hz": 50,
+  "wbc_repository": "https://github.com/NVlabs/GR00T-WholeBodyControl",
+  "groot_repository": "https://github.com/NVIDIA/Isaac-GR00T",
+  "lerobot_commit": "a445d9c9da6bea99a8972daa4fe1fdd053d711d2",
+  "mujoco": "3.14.0",
+  "voice_runtime": "sherpa-onnx==2.0.1",
+  "voice_numpy": "1.26.4",
+  "publication_date": "2026-10-29",
+  "excluded_modified_upstream_files": [
+    "gear_sonic/data/human/human_joints_info.pkl"
+  ],
+  "exclusion_reason": "Binary human calibration data is site-specific and not redistributed."
+}

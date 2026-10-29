@@ -1,0 +1,21 @@
+{
+  "physical_to_wire": {
+    "left": "right",
+    "right": "left"
+  },
+  "verification": "REFERENCE mapping from one commissioned robot; verify physical left/right on your robot before control.",
+  "physical_motor_ids": {
+    "left": 0,
+    "right": 1
+  },
+  "physical_serial_ports": {
+    "left": "/dev/ttyUSB2",
+    "right": "/dev/ttyUSB1"
+  },
+  "proposed_opening_reference_rad": {
+    "left": 2.8,
+    "right": 2.8
+  },
+  "left_opening_reference_verified": false,
+  "initialization": "No automatic opening. Recover physical left under operator supervision before normal startup capture."
+}

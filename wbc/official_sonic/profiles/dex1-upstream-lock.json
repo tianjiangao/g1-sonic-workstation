@@ -1,0 +1,9 @@
+{
+  "repo": "https://github.com/unitreerobotics/xr_teleoperate",
+  "commit": "817fb00c63cde15e5f24a0f8fa08e1e33ed89d3b",
+  "files": {
+    "teleop/robot_control/robot_hand_unitree.py": "4ee8bd44e9512fb29f20113728e1cf3eebd077652b8540e62f8fd11943cfc034",
+    "teleop/utils/weighted_moving_filter.py": "48d914f37de405351d327b9712a36c013f8375d550258fecbdd37997e526308b",
+    "LICENSE.upstream": "63762ccebdb836cf2bae6b1ae0de526e7499dbf45e554c790ebc45942cce3e36"
+  }
+}

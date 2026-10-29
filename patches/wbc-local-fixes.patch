@@ -1,0 +1,956 @@
+diff --git a/gear_sonic/camera/composed_camera.py b/gear_sonic/camera/composed_camera.py
+index d5f5607..b037387 100644
+--- a/gear_sonic/camera/composed_camera.py
++++ b/gear_sonic/camera/composed_camera.py
+@@ -373,10 +373,18 @@ class ComposedCameraSensor(Sensor, SensorServer):
+             return OAKSensor(config=oak_config, mount_position=mount_position, device_id=device_id)
+ 
+         elif camera_type == "realsense":
+-            from gear_sonic.camera.drivers.realsense import RealSenseSensor
+-
+-            print(f"Initializing RealSense sensor for camera type: {camera_type}")
+-            return RealSenseSensor(mount_position=mount_position)
++            from gear_sonic.camera.drivers.realsense import RealSenseSensor, RealSenseConfig
++            import pyrealsense2 as rs
++
++            serials = sorted(d.get_info(rs.camera_info.serial_number)
++                             for d in rs.context().query_devices())
++            if not device_id or device_id not in serials:
++                raise ValueError(f"RealSense {mount_position}: explicit connected serial required")
++            realsense_config = RealSenseConfig()
++            realsense_config.fps = self.config.fps
++            print(f"Initializing RealSense {mount_position}: {device_id}")
++            return RealSenseSensor(config=realsense_config, id=serials.index(device_id),
++                                   mount_position=mount_position)
+ 
+         elif camera_type.endswith(".mp4"):
+             from gear_sonic.camera.drivers.dummy import ReplayDummySensor
+@@ -388,7 +396,11 @@ class ComposedCameraSensor(Sensor, SensorServer):
+             from gear_sonic.camera.drivers.usb_camera import USBCameraConfig, USBCameraSensor
+ 
+             usb_config = USBCameraConfig()
+-            device_idx = int(device_id) if device_id else 0
++            device_idx = device_id if device_id and device_id.startswith("/dev/video") else int(device_id) if device_id else 0
++            usb_config.fps = self.config.fps
++            if mount_position == CameraMountPosition.EGO_VIEW.value:
++                usb_config.image_dim = (1280, 480)
++                usb_config.fourcc = "MJPG"
+             print(f"Initializing USB camera for type: {camera_type}, device: {device_idx}")
+             return USBCameraSensor(
+                 config=usb_config, mount_position=mount_position, device_index=device_idx
+@@ -410,15 +422,20 @@ class ComposedCameraSensor(Sensor, SensorServer):
+         self._check_for_errors()
+ 
+         expected_cameras = set(self.camera_queues.keys())
+-        message = {}
+-
++        # USB and RealSense finish at different instants. Keep partial batches
++        # briefly instead of draining and losing every other camera's frame.
++        now = time.monotonic()
++        pending = getattr(self, "_pending_frames", {})
++        pending = {k: v for k, v in pending.items() if now-v[1] < .25}
+         for mount_position, camera_queue in self.camera_queues.items():
+             frame = self._get_latest_from_queue(camera_queue)
+             if frame is not None:
+-                message[mount_position] = frame
+-
+-        if set(message.keys()) == expected_cameras:
+-            return message
++                pending[mount_position] = (frame, now)
++        self._pending_frames = pending
++        if set(pending) == expected_cameras:
++            result = {k: v[0] for k, v in pending.items()}
++            self._pending_frames = {}
++            return result
+         return None
+ 
+     def _get_latest_from_queue(self, camera_queue: queue.Queue) -> dict[str, Any] | None:
+@@ -460,33 +477,28 @@ class ComposedCameraSensor(Sensor, SensorServer):
+     def run_server(self):
+         """Main server loop — reads, serializes and publishes frames."""
+         idx = 0
+-        server_start_time = time.monotonic()
+-        fps_print_time = time.monotonic()
++        next_publish = time.monotonic()
++        fps_print_time = next_publish
+         frame_interval = 1.0 / self.config.fps
+-
+         while True:
+-            target_time = server_start_time + (idx + 1) * frame_interval
+-
++            delay = next_publish-time.monotonic()
++            if delay > 0:
++                time.sleep(delay)
+             message = self.read()
+-            if message:
+-                if self.config.test_latency:
+-                    read_qr_code(message)
+-
+-                serialized_message = self.serialize_message(message)
+-                self.send_message(serialized_message)
+-                idx += 1
+-
+-                if idx % 10 == 0:
+-                    print(f"Image sending FPS: {10 / (time.monotonic() - fps_print_time):.2f}")
+-                    fps_print_time = time.monotonic()
+-
+-            current_time = time.monotonic()
+-            sleep_time = target_time - current_time
+-            if sleep_time > 0:
+-                time.sleep(sleep_time)
+-            else:
+-                if not message:
+-                    idx += 1
++            if message is None:
++                # A camera may complete a few ms after its peers. Wait for
++                # that batch instead of skipping the entire next frame slot.
++                time.sleep(.001)
++                continue
++            if self.config.test_latency:
++                read_qr_code(message)
++            self.send_message(self.serialize_message(message))
++            idx += 1
++            now = time.monotonic()
++            next_publish = max(next_publish+frame_interval, now)
++            if idx % 100 == 0:
++                print(f"Image sending FPS: {100/(now-fps_print_time):.2f}")
++                fps_print_time = now
+ 
+     def observation_space(self):
+         try:
+diff --git a/gear_sonic/camera/drivers/usb_camera.py b/gear_sonic/camera/drivers/usb_camera.py
+index 9c196b5..c62e1f5 100644
+--- a/gear_sonic/camera/drivers/usb_camera.py
++++ b/gear_sonic/camera/drivers/usb_camera.py
+@@ -45,6 +45,8 @@ class USBCameraSensor(Sensor):
+         if not self.cap.isOpened():
+             raise RuntimeError(f"Failed to open USB camera at index {idx}")
+ 
++        if getattr(config, "fourcc", None):
++            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*config.fourcc))
+         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, config.image_dim[0])
+         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, config.image_dim[1])
+         self.cap.set(cv2.CAP_PROP_FPS, config.fps)
+diff --git a/gear_sonic/scripts/pico_manager_thread_server.py b/gear_sonic/scripts/pico_manager_thread_server.py
+index 3983530..ba8b509 100644
+--- a/gear_sonic/scripts/pico_manager_thread_server.py
++++ b/gear_sonic/scripts/pico_manager_thread_server.py
+@@ -25,7 +25,7 @@
+ from collections import defaultdict, deque
+ from enum import Enum, IntEnum
+ import os
+-import subprocess
++import logging
+ import threading
+ import time
+ 
+@@ -36,6 +36,39 @@ import torch
+ import zmq
+ 
+ from gear_sonic.utils.teleop import input_readers
++from gear_sonic.utils.teleop.xrt_runtime import XrtSession
++
++_xrt_session = None
++_xrt_timeout = 60.0
++_pc_service_existing = False
++
++
++def _start_xrt():
++    global _xrt_session
++    if xrt is None:
++        raise ImportError("XRoboToolkit SDK not available")
++    if _xrt_session is None:
++        _xrt_session = XrtSession(xrt, timeout=_xrt_timeout,
++                                  manage_service=not _pc_service_existing)
++    _xrt_session.start()
++
++
++def _send_fresh(socket, message, reader, sample=None):
++    if reader.get_latest() is None:
++        raise RuntimeError("No fresh full-body sample; refusing to publish")
++    if sample is not None:
++        age = time.monotonic() - sample["timestamp_monotonic"]
++        if not 0 <= age < getattr(reader, "freshness_stale_s", .250):
++            raise RuntimeError("Computed body sample expired; refusing to publish")
++    socket.send(message)
++
++
++def _close_xrt():
++    global _xrt_session
++    if _xrt_session is not None:
++        _xrt_session.close()
++        _xrt_session = None
++
+ from gear_sonic.utils.teleop.zmq.zmq_poller import ZMQPoller
+ from gear_sonic.trl.utils.rotation_conversion import decompose_rotation_aa
+ from gear_sonic.trl.utils.torch_transform import (
+@@ -363,12 +396,7 @@ def run_vr3pt_live_visualizer():
+     print("=" * 60)
+ 
+     # Initialize XRT
+-    subprocess.Popen(["bash", "/opt/apps/roboticsservice/runService.sh"])
+-    xrt.init()
+-    print("Waiting for body tracking data...")
+-    while not xrt.is_body_data_available():
+-        print("waiting for body data...")
+-        time.sleep(1)
++    _start_xrt()
+ 
+     print("Body data available! Capturing VR 3-point pose...")
+ 
+@@ -413,12 +441,7 @@ def run_vr3pt_realtime_visualizer(update_hz: int = 10):
+     print("=" * 60)
+ 
+     # Initialize XRT
+-    subprocess.Popen(["bash", "/opt/apps/roboticsservice/runService.sh"])
+-    xrt.init()
+-    print("Waiting for body tracking data...")
+-    while not xrt.is_body_data_available():
+-        print("waiting for body data...")
+-        time.sleep(1)
++    _start_xrt()
+ 
+     print("Body data available! Starting real-time visualization...")
+     print(f"Update rate: {update_hz} Hz")
+@@ -616,6 +639,7 @@ _ISAAC_TELEOP_READERS = (input_readers.IsaacTeleopReader,)
+ 
+ def get_controller_inputs(reader=None):
+     """Fetch controller button/trigger states from XRoboToolkit or IsaacTeleop."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         ctrl = reader.get_controller_data()
+         if ctrl is None:
+@@ -637,6 +661,7 @@ def get_controller_inputs(reader=None):
+ 
+ def get_controller_axes(reader=None):
+     """Fetch joystick axes (lx, ly, rx, ry). Falls back to zeros if not available."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         ctrl = reader.get_controller_data()
+         if ctrl is None:
+@@ -665,6 +690,7 @@ def get_controller_axes(reader=None):
+ 
+ def get_menu_buttons(reader=None):
+     """Fetch both menu buttons (left, right). Falls back to False if not available."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         return False, False
+     if xrt is None:
+@@ -684,6 +710,7 @@ def get_menu_buttons(reader=None):
+ 
+ def get_axis_clicks(reader=None):
+     """Fetch both axis click buttons (left, right). Falls back to False if not available."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         ctrl = reader.get_controller_data()
+         if ctrl is None:
+@@ -709,6 +736,7 @@ def get_axis_clicks(reader=None):
+ 
+ def get_face_buttons(reader=None):
+     """Fetch primary face buttons A and X. Returns (a_pressed, x_pressed)."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         ctrl = reader.get_controller_data()
+         if ctrl is None:
+@@ -729,6 +757,7 @@ def get_face_buttons(reader=None):
+ 
+ def get_abxy_buttons(reader=None):
+     """Fetch A,B,X,Y face buttons as booleans (a,b,x,y)."""
++    xrt = getattr(reader, 'sdk', globals()['xrt'])
+     if isinstance(reader, _ISAAC_TELEOP_READERS):
+         ctrl = reader.get_controller_data()
+         if ctrl is None:
+@@ -798,83 +827,8 @@ def _interp_pose_axis_angle(
+     return out_pose
+ 
+ 
+-class PicoReader:
+-    """
+-    Background reader that pulls Pico/XRT data as fast as possible and computes dt/FPS.
+-    """
+-
+-    def __init__(self, max_queue_size: int = 15):
+-        self._stop = threading.Event()
+-        self._thread = threading.Thread(target=self._run, daemon=True)
+-        self._last_t = None
+-        self._fps_ema = 0.0
+-        self._last_stamp_ns = None
+-        self._latest = None
+-        self._lock = threading.Lock()
+-
+-    def start(self):
+-        self._thread.start()
+-
+-    def stop(self):
+-        self._stop.set()
+-        self._thread.join(timeout=1.0)
+-
+-    def get_latest(self):
+-        with self._lock:
+-            return self._latest
+-
+-    @property
+-    def disconnected(self) -> bool:
+-        return False
+-
+-    def clear_disconnect(self):
+-        pass
+-
+-    def get_timestamp_ns(self) -> int:
+-        if xrt is None:
+-            return 0
+-        return int(xrt.get_time_stamp_ns())
+-
+-    def _run(self):
+-        last_report = time.time()
+-        while not self._stop.is_set():
+-            if not xrt.is_body_data_available():
+-                time.sleep(0.001)
+-                continue
+-            stamp_ns = xrt.get_time_stamp_ns()
+-            prev_stamp_ns = self._last_stamp_ns
+-            if prev_stamp_ns is not None and stamp_ns == prev_stamp_ns:
+-                time.sleep(0.000001)
+-                continue
+-            # Compute device-based dt/fps using timestamp deltas (ns -> s)
+-            device_dt = ((stamp_ns - prev_stamp_ns) * 1e-9) if prev_stamp_ns is not None else 0.0
+-            if device_dt > 0.0:
+-                inst = 1.0 / device_dt
+-                self._fps_ema = inst if self._fps_ema == 0.0 else (0.9 * self._fps_ema + 0.1 * inst)
+-            self._last_stamp_ns = stamp_ns
+-            t_realtime = time.time()
+-            t_monotonic = time.monotonic()
+-            try:
+-                body_poses = xrt.get_body_joints_pose()
+-
+-                sample = {
+-                    "body_poses_np": np.array(body_poses),
+-                    "timestamp_realtime": t_realtime,
+-                    "timestamp_monotonic": t_monotonic,
+-                    "timestamp_ns": stamp_ns,
+-                    "dt": device_dt,
+-                    "fps": self._fps_ema,
+-                }
+-                with self._lock:
+-                    self._latest = sample
+-                now = time.time()
+-                if now - last_report >= 5.0:
+-                    print(
+-                        f"[PicoReader] dt_ts: {device_dt*1000.0:.2f} ms, fps: {self._fps_ema:.2f}"
+-                    )
+-                    last_report = now
+-            except Exception as e:
+-                print(f"[PicoReader] read error: {e}")
++# Use the shared reader, including body timestamp and stale-frame handling.
++PicoReader = input_readers.PicoReader
+ 
+ 
+ def _pose_stream_common(
+@@ -1539,7 +1493,7 @@ class PoseStreamer:
+             }
+ 
+             packed_message = pack_pose_message(numpy_data, topic="pose")
+-            self.socket.send(packed_message)
++            _send_fresh(self.socket, packed_message, self.reader, sample=sample)
+ 
+             if self.record_dir:
+                 out_path = os.path.join(self.record_dir, f"pose_{self.record_idx:06d}.npz")
+@@ -1584,14 +1538,9 @@ def _init_input_source(
+             "XRoboToolkit SDK not available. Install xrobotoolkit_sdk to run Pico streaming."
+         )
+ 
+-    subprocess.Popen(["bash", "/opt/apps/roboticsservice/runService.sh"])
+-    xrt.init()
+-    print("Waiting for body tracking data...")
+-    while not xrt.is_body_data_available():
+-        print("waiting for body data...")
+-        time.sleep(1)
++    _start_xrt()
+ 
+-    reader = PicoReader(max_queue_size=buffer_size)
++    reader = _xrt_session.add_reader(PicoReader(max_queue_size=buffer_size))
+     reader.start()
+     return reader
+ 
+@@ -1609,12 +1558,13 @@ def run_pico(
+     enable_waist_tracking: bool = False,
+     enable_smpl_vis: bool = False,
+     input_source: str = "xrt",
++    bind_host: str = "*",
+ ):
+     """Run body tracking with real-time visualization and ZMQ streaming."""
+     reader = _init_input_source(input_source, buffer_size)
+     context = zmq.Context()
+     socket = context.socket(zmq.PUB)
+-    socket.bind(f"tcp://*:{port}")
++    socket.bind(f"tcp://{bind_host}:{port}")
+     time.sleep(0.1)
+     print(f"ZMQ socket bound to port {port}")
+     if build_command_message is not None and build_planner_message is not None:
+@@ -1776,7 +1726,7 @@ class PlannerStreamer:
+         try:
+             # Avoid sending old commands if XRT timestamp hasn't advanced, in case of headset disconnect
+             xrt_timestamp = self.reader.get_timestamp_ns()
+-            if xrt_timestamp == self.last_xrt_timestamp:
++            if xrt_timestamp <= 0 or xrt_timestamp == self.last_xrt_timestamp:
+                 return
+             self.last_xrt_timestamp = xrt_timestamp
+ 
+@@ -1881,7 +1831,7 @@ class PlannerStreamer:
+                 vr_3pt_orientation=vr_3pt_orientation,
+                 vr_3pt_compliance=vr_3pt_compliance,
+             )
+-            self.socket.send(msg)
++            _send_fresh(self.socket, msg, self.reader)
+         except Exception as e:
+             import traceback
+ 
+@@ -1912,6 +1862,8 @@ def run_pico_manager(
+     enable_waist_tracking: bool = False,
+     enable_smpl_vis: bool = False,
+     input_source: str = "xrt",
++    bind_host: str = "*",
++    reader=None,
+ ):
+     """
+     Manager: creates shared PUB socket and runs pose/planner streamers based on current mode.
+@@ -1919,11 +1871,12 @@ def run_pico_manager(
+       A+X: Toggle between planner and pose mode
+       A+B+X+Y: Toggle policy start/stop
+     """
+-    reader = _init_input_source(input_source, buffer_size)
++    if reader is None:
++        reader = _init_input_source(input_source, buffer_size)
+ 
+     context = zmq.Context()
+     socket = context.socket(zmq.PUB)
+-    socket.bind(f"tcp://*:{port}")
++    socket.bind(f"tcp://{bind_host}:{port}")
+     time.sleep(0.1)
+     print(f"[Manager] ZMQ socket bound to port {port}")
+ 
+@@ -1978,6 +1931,9 @@ def run_pico_manager(
+     #   Emergency stop from any mode: A+B+X+Y (start_combo) --> OFF
+     #   POSE_PAUSE: left_menu_button held --> POSE_PAUSE, released --> POSE
+     #
++    if getattr(reader, "start_after_setup", False):
++        reader.start()
++        reader.wait_ready()
+     print("Manager controls: A+X=toggle mode, A+B+X+Y=start/stop policy")
+     current_mode = StreamMode.OFF
+     # Track which mode VR_3PT was entered from, so left_axis_click returns to it.
+@@ -1991,6 +1947,13 @@ def run_pico_manager(
+         prev_start_combo = False
+         prev_left_axis_click = False
+         while True:
++            manager_iteration_at = time.monotonic()
++            if reader.disconnected:
++                raise RuntimeError("Body data lost; closing publisher. Robot may still hold position; "
++                                   "use the independently verified robot stop procedure. Reconnect and recalibrate.")
++            if reader.get_latest() is None:
++                time.sleep(.001)
++                continue
+             # Poll Pico controller for buttons/axes
+             a_pressed, b_pressed, x_pressed, y_pressed = get_abxy_buttons(reader)
+ 
+@@ -2116,9 +2079,9 @@ def run_pico_manager(
+                     or new_mode == StreamMode.PLANNER_FROZEN_UPPER_BODY
+                     or new_mode == StreamMode.PLANNER_VR_3PT
+                 ):
+-                    socket.send(build_command_message(start=True, stop=False, planner=True))
++                    _send_fresh(socket, build_command_message(start=True, stop=False, planner=True), reader)
+                 elif new_mode == StreamMode.POSE:
+-                    socket.send(build_command_message(start=True, stop=False, planner=False))
++                    _send_fresh(socket, build_command_message(start=True, stop=False, planner=False), reader)
+ 
+                 print(f"[Manager] StreamMode switch: {current_mode.name} -> {new_mode.name}")
+                 current_mode = new_mode
+@@ -2145,6 +2108,7 @@ def run_pico_manager(
+             prev_by_pressed = by_pressed
+             prev_start_combo = start_combo
+             prev_left_axis_click = left_axis_click
++            time.sleep(max(0.0, 1.0 / target_fps - (time.monotonic() - manager_iteration_at)))
+ 
+     except KeyboardInterrupt:
+         print("\nStopping manager...")
+@@ -2152,13 +2116,14 @@ def run_pico_manager(
+         # Cleanup resources
+         reader.stop()
+         three_point.close()
+-        socket.close()
++        planner_streamer.feedback_reader.poller.close()
++        socket.close(linger=0)
+         context.term()
+         print("[Manager] Shutdown complete")
+ 
+ 
+-if __name__ == "__main__":
+-
++def main():
++    global _xrt_timeout, _pc_service_existing
+     import argparse
+ 
+     parser = argparse.ArgumentParser()
+@@ -2251,7 +2216,21 @@ if __name__ == "__main__":
+             "'isaac-teleop' for in-process IsaacTeleop / CloudXR DeviceIO"
+         ),
+     )
++    parser.add_argument("--bind-host", default="*", help="ZMQ bind address; use 127.0.0.1 for isolated checks")
++    parser.add_argument("--xrt-timeout", type=float, default=60.0,
++                        help="Maximum wait for fresh full-body XRT frames (seconds)")
++    parser.add_argument("--pc-service-existing", action="store_true",
++                        help="Require existing PC Service; never auto-start it")
++    parser.add_argument("--xrt-check", action="store_true",
++                        help="Read-only body-data check; opens no ZMQ publisher or robot interface")
+     args = parser.parse_args()
++    _xrt_timeout = args.xrt_timeout
++    _pc_service_existing = args.pc_service_existing
++    if args.xrt_check:
++        _start_xrt()
++        print("XRT_CHECK PASS: fresh full-body frames; no ZMQ publisher opened")
++        return
++
+ 
+     # Standalone VR3Pt test modes (exit after finishing)
+     if args.vr3pt_test:
+@@ -2292,6 +2271,7 @@ if __name__ == "__main__":
+             enable_waist_tracking=args.waist_tracking,
+             enable_smpl_vis=args.vis_smpl,
+             input_source=args.input_source,
++            bind_host=args.bind_host,
+         )
+     else:
+         # Run legacy single-thread pose streaming
+@@ -2308,4 +2288,24 @@ if __name__ == "__main__":
+             enable_waist_tracking=args.waist_tracking,
+             enable_smpl_vis=args.vis_smpl,
+             input_source=args.input_source,
++            bind_host=args.bind_host,
+         )
++
++
++if __name__ == "__main__":
++    import signal
++    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
++
++    def _interrupt(signum, frame):
++        raise KeyboardInterrupt
++
++    signal.signal(signal.SIGTERM, _interrupt)
++    try:
++        main()
++    except (RuntimeError, TimeoutError) as exc:
++        logging.error("Startup/runtime failure: %s", exc)
++        raise SystemExit(2)
++    except KeyboardInterrupt:
++        logging.info("Interrupted; closing XRT")
++    finally:
++        _close_xrt()
+diff --git a/gear_sonic/trl/utils/rotation_conversion.py b/gear_sonic/trl/utils/rotation_conversion.py
+index eec519c..d9d86a0 100644
+--- a/gear_sonic/trl/utils/rotation_conversion.py
++++ b/gear_sonic/trl/utils/rotation_conversion.py
+@@ -605,12 +605,18 @@ def quaternion_multiply_np(a, b):
+ def decompose_rotation_aa(rotation_aa, v2):
+     angle = np.linalg.norm(rotation_aa, axis=1)[:, None]
+     w = np.cos(angle / 2)
+-    v = np.sin(angle / 2) * rotation_aa / angle
++    # sin(angle/2)/angle has limit 1/2 at zero; avoid 0/0 for straight joints.
++    v = 0.5 * np.sinc(angle / (2 * np.pi)) * rotation_aa
+     q = np.concatenate([w, v], axis=1)
+ 
+     v_twist = np.dot(v, v2)[:, None] * v2
+     q_twist = np.concatenate([w, v_twist], axis=1)
+-    q_twist = q_twist / np.linalg.norm(q_twist, axis=1)[:, None]
++    twist_norm = np.linalg.norm(q_twist, axis=1, keepdims=True)
++    singular = twist_norm[:, 0] < 1e-12
++    # At a pi swing orthogonal to the twist axis, twist is undetermined.
++    # Choose identity twist and leave the full rotation in swing.
++    q_twist = q_twist / np.where(singular[:, None], 1.0, twist_norm)
++    q_twist[singular] = [1.0, 0.0, 0.0, 0.0]
+ 
+     q_twist_inv = q_twist * np.array([1, -1, -1, -1])
+     q_swing = quaternion_multiply_np(q_twist_inv, q)
+diff --git a/gear_sonic/utils/mujoco_sim/base_sim.py b/gear_sonic/utils/mujoco_sim/base_sim.py
+index fe8f4a0..0e9322c 100644
+--- a/gear_sonic/utils/mujoco_sim/base_sim.py
++++ b/gear_sonic/utils/mujoco_sim/base_sim.py
+@@ -559,13 +559,8 @@ class BaseSimulator:
+                 f"Only 'default' is supported in this minimal build."
+             )
+ 
+-        try:
+-            if self.config.get("INTERFACE", None):
+-                ChannelFactoryInitialize(self.config["DOMAIN_ID"], self.config["INTERFACE"])
+-            else:
+-                ChannelFactoryInitialize(self.config["DOMAIN_ID"])
+-        except Exception as e:
+-            print(f"Note: Channel factory initialization attempt: {e}")
++        # DDS is already initialized by SimWrapper.init_channel().
++        # Do not initialize the same ChannelFactory twice.
+ 
+         self.init_unitree_bridge()
+         self.sim_env.set_unitree_bridge(self.unitree_bridge)
+diff --git a/gear_sonic/utils/teleop/input_readers.py b/gear_sonic/utils/teleop/input_readers.py
+index 47a6dc4..46db200 100644
+--- a/gear_sonic/utils/teleop/input_readers.py
++++ b/gear_sonic/utils/teleop/input_readers.py
+@@ -11,6 +11,8 @@ from typing import Any
+ 
+ import numpy as np
+ 
++from gear_sonic.utils.teleop.body_freshness import BodyFreshnessGate, read_body_snapshot
++
+ logger = logging.getLogger(__name__)
+ 
+ try:
+@@ -25,20 +27,19 @@ except ImportError:
+ 
+ 
+ class PicoReader:
+-    """Background reader that pulls Pico/XRT data and computes dt/FPS."""
+-
+-    STALE_TIMEOUT = 5.0
++    """Full-body reader with all-joint validation and a latched disconnect gate."""
+ 
+-    def __init__(self, max_queue_size: int = 15):
++    def __init__(self, max_queue_size: int = 15, freshness_config=None):
+         del max_queue_size
+         self._stop = threading.Event()
+         self._thread = threading.Thread(target=self._run, daemon=True)
+-        self._fps_ema = 0.0
+-        self._last_stamp_ns = None
+-        self._latest = None
+         self._lock = threading.Lock()
+-        self._last_new_data_time = time.monotonic()
+         self._disconnected = threading.Event()
++        self._gate = BodyFreshnessGate(freshness_config)
++        self.freshness_stale_s = self._gate.config.stale_s
++        self._last_new_data_time = time.monotonic()
++        self._ever_ready = False
++        self._latch_reason = None
+ 
+     def start(self):
+         if not self._thread.is_alive():
+@@ -49,90 +50,76 @@ class PicoReader:
+         if self._thread.is_alive():
+             self._thread.join(timeout=1.0)
+ 
++    def _latest_locked(self):
++        sample = self._gate.latest()
++        if time.monotonic() - self._last_new_data_time >= self._gate.config.stale_s:
++            self._disconnected.set()
++            self._latch_reason = self._latch_reason or 'stale_complete_frame'
++        return None if self._disconnected.is_set() else sample
++
+     def get_latest(self):
+         with self._lock:
+-            return self._latest
++            return self._latest_locked()
+ 
+     @property
+     def disconnected(self) -> bool:
+-        return self._disconnected.is_set()
++        with self._lock:
++            self._latest_locked()
++            return self._disconnected.is_set()
+ 
+     def clear_disconnect(self):
+-        self._disconnected.clear()
+-        self._last_new_data_time = time.monotonic()
+-        self._last_stamp_ns = None
+-        self._fps_ema = 0.0
++        """Explicit operator rearm; drop cached data and require two new joint frames."""
++        with self._lock:
++            self._gate = BodyFreshnessGate(self._gate.config)
++            self._disconnected.clear()
++            self._latch_reason = None
++            self._ever_ready = False
++            self._last_new_data_time = time.monotonic()
+ 
+     def get_timestamp_ns(self) -> int:
+-        if xrt is None:
+-            return 0
+-        return int(xrt.get_time_stamp_ns())
++        sample = self.get_latest()
++        return int(sample['timestamp_ns']) if sample is not None else 0
+ 
+-    def _run(self):
+-        last_report = time.time()
+-        while not self._stop.is_set():
+-            if xrt is None or not xrt.is_body_data_available():
+-                if (
+-                    time.monotonic() - self._last_new_data_time > self.STALE_TIMEOUT
+-                    and not self._disconnected.is_set()
+-                ):
+-                    logger.warning(
+-                        "[PicoReader] No new data for %.1fs, flagging disconnect",
+-                        self.STALE_TIMEOUT,
+-                    )
+-                    self._disconnected.set()
+-                time.sleep(0.001)
+-                continue
++    def freshness_stats(self):
++        with self._lock:
++            return dict(self._gate.stats(), fault_latched=self._disconnected.is_set(),
++                        latch_reason=self._latch_reason)
+ 
+-            stamp_ns = xrt.get_time_stamp_ns()
+-            prev_stamp_ns = self._last_stamp_ns
+-            if prev_stamp_ns is not None and stamp_ns == prev_stamp_ns:
+-                if (
+-                    time.monotonic() - self._last_new_data_time > self.STALE_TIMEOUT
+-                    and not self._disconnected.is_set()
+-                ):
+-                    logger.warning(
+-                        "[PicoReader] Timestamps stale for %.1fs, flagging disconnect",
+-                        self.STALE_TIMEOUT,
+-                    )
++    def _poll_once(self):
++        try:
++            if xrt is None:
++                raise RuntimeError('XRoboToolkit SDK unavailable')
++            pose, timestamps, available = read_body_snapshot(xrt)
++            with self._lock:
++                sample = self._gate.update(pose, timestamps, available=available)
++                if sample is not None:
++                    self._last_new_data_time = sample['timestamp_monotonic']
++                    self._ever_ready = True
++                elif self._ever_ready and self._gate.reason not in (
++                        'warming_up', 'awaiting_complete_joint_update'):
+                     self._disconnected.set()
+-                time.sleep(0.000001)
+-                continue
+-
+-            self._last_new_data_time = time.monotonic()
+-            if self._disconnected.is_set():
+-                logger.info("[PicoReader] Fresh data received, connection restored")
+-                self._disconnected.clear()
+-
+-            device_dt = ((stamp_ns - prev_stamp_ns) * 1e-9) if prev_stamp_ns is not None else 0.0
+-            if device_dt > 0.0:
+-                inst = 1.0 / device_dt
+-                self._fps_ema = inst if self._fps_ema == 0.0 else (0.9 * self._fps_ema + 0.1 * inst)
+-            self._last_stamp_ns = stamp_ns
++                    self._latch_reason = self._latch_reason or self._gate.reason
++        except Exception as exc:
++            with self._lock:
++                self._gate.invalidate('sdk_snapshot_error:' + str(exc))
++                if self._ever_ready:
++                    self._disconnected.set()
++                    self._latch_reason = self._latch_reason or self._gate.reason
+ 
+-            try:
+-                body_poses = xrt.get_body_joints_pose()
+-                sample = {
+-                    "body_poses_np": np.array(body_poses),
+-                    "timestamp_realtime": time.time(),
+-                    "timestamp_monotonic": time.monotonic(),
+-                    "timestamp_ns": stamp_ns,
+-                    "dt": device_dt,
+-                    "fps": self._fps_ema,
+-                }
+-                with self._lock:
+-                    self._latest = sample
+-
+-                now = time.time()
+-                if now - last_report >= 5.0:
+-                    logger.info(
+-                        "[PicoReader] dt_ts: %.2f ms, fps: %.2f",
+-                        device_dt * 1000.0,
+-                        self._fps_ema,
+-                    )
+-                    last_report = now
+-            except Exception:
+-                logger.exception("[PicoReader] read error")
++    def _run(self):
++        last_reason = None
++        last_report = -float('inf')
++        while not self._stop.is_set():
++            self._poll_once()
++            with self._lock:
++                self._latest_locked()
++                reason = self._gate.reason
++            now = time.monotonic()
++            if reason != last_reason and now - last_report >= 5:
++                logger.info('[PicoReader] body freshness=%s; thresholds=%s', reason, self._gate.config)
++                last_reason = reason
++                last_report = now
++            self._stop.wait(.001)
+ 
+ 
+ def _attr_or_item(obj: Any, name: str, default: Any = None) -> Any:
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/CMakeLists.txt b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/CMakeLists.txt
+index b713922..f22b494 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/CMakeLists.txt
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/CMakeLists.txt
+@@ -258,4 +258,12 @@ set_target_properties(
+              OUTPUT_NAME run_tests
+              CXX_STANDARD 20
+              CXX_STANDARD_REQUIRED ON
+-             CXX_EXTENSIONS OFF)
+\ No newline at end of file
++             CXX_EXTENSIONS OFF)
++# Separate simulation executable; preserve the existing deployment binary.
++option(SONIC_SIM_ONLY "Build a namespace-guarded simulation executable" OFF)
++if(SONIC_SIM_ONLY)
++  target_compile_definitions(g1_deploy_onnx_ref PRIVATE SONIC_SIM_ONLY=1)
++  set_target_properties(g1_deploy_onnx_ref PROPERTIES
++    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/../sim_teleop/bin"
++    OUTPUT_NAME g1_deploy_sim)
++endif()
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/cmake/ROS2.cmake b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/cmake/ROS2.cmake
+index e5c4478..6247bce 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/cmake/ROS2.cmake
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/cmake/ROS2.cmake
+@@ -51,6 +51,9 @@ if(NOT ROS2_DISTRO_FOUND)
+   return()
+ endif()
+ 
++# Prevent DDS features.h from shadowing glibc <features.h>.
++# Keep the parent ROS2 include path and other package include directories.
++list(FILTER ROS2_INCLUDE_DIRS EXCLUDE REGEX "/include/(dds|idl)$")
+ list(REMOVE_DUPLICATES ROS2_INCLUDE_DIRS)
+ 
+ # Essential ROS2 libraries for basic pub/sub functionality
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/policy_parameters.hpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/policy_parameters.hpp
+index d0d9f45..7d00aa6 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/policy_parameters.hpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/policy_parameters.hpp
+@@ -34,35 +34,35 @@
+ 
+ #include <array>
+ 
+-const double ONE_DEGREE = 0.0174533;  ///< One degree in radians.
++constexpr double ONE_DEGREE = 0.0174533;  ///< One degree in radians.
+ 
+ // Motor armature constants (used for PID gain computation)
+-const double ARMATURE_5020 = 0.003609725;
+-const double ARMATURE_7520_14 = 0.010177520;
+-const double ARMATURE_7520_22 = 0.025101925;
+-const double ARMATURE_4010 = 0.00425;
++constexpr double ARMATURE_5020 = 0.003609725;
++constexpr double ARMATURE_7520_14 = 0.010177520;
++constexpr double ARMATURE_7520_22 = 0.025101925;
++constexpr double ARMATURE_4010 = 0.00425;
+ 
+ // Control parameters for PID gain computation
+-const double NATURAL_FREQ = 10 * 2.0 * 3.1415926535; // 10Hz
+-const double DAMPING_RATIO = 2;
++constexpr double NATURAL_FREQ = 10 * 2.0 * 3.1415926535; // 10Hz
++constexpr double DAMPING_RATIO = 2;
+ 
+ // Computed stiffness values: stiffness = armature * natural_freq^2
+-const double STIFFNESS_5020 = ARMATURE_5020 * NATURAL_FREQ * NATURAL_FREQ;
+-const double STIFFNESS_7520_14 = ARMATURE_7520_14 * NATURAL_FREQ * NATURAL_FREQ;
+-const double STIFFNESS_7520_22 = ARMATURE_7520_22 * NATURAL_FREQ * NATURAL_FREQ;
+-const double STIFFNESS_4010 = ARMATURE_4010 * NATURAL_FREQ * NATURAL_FREQ;
++constexpr double STIFFNESS_5020 = ARMATURE_5020 * NATURAL_FREQ * NATURAL_FREQ;
++constexpr double STIFFNESS_7520_14 = ARMATURE_7520_14 * NATURAL_FREQ * NATURAL_FREQ;
++constexpr double STIFFNESS_7520_22 = ARMATURE_7520_22 * NATURAL_FREQ * NATURAL_FREQ;
++constexpr double STIFFNESS_4010 = ARMATURE_4010 * NATURAL_FREQ * NATURAL_FREQ;
+ 
+ // Computed damping values: damping = 2.0 * damping_ratio * armature * natural_freq
+-const double DAMPING_5020 = 2.0 * DAMPING_RATIO * ARMATURE_5020 * NATURAL_FREQ;
+-const double DAMPING_7520_14 = 2.0 * DAMPING_RATIO * ARMATURE_7520_14 * NATURAL_FREQ;
+-const double DAMPING_7520_22 = 2.0 * DAMPING_RATIO * ARMATURE_7520_22 * NATURAL_FREQ;
+-const double DAMPING_4010 = 2.0 * DAMPING_RATIO * ARMATURE_4010 * NATURAL_FREQ;
++constexpr double DAMPING_5020 = 2.0 * DAMPING_RATIO * ARMATURE_5020 * NATURAL_FREQ;
++constexpr double DAMPING_7520_14 = 2.0 * DAMPING_RATIO * ARMATURE_7520_14 * NATURAL_FREQ;
++constexpr double DAMPING_7520_22 = 2.0 * DAMPING_RATIO * ARMATURE_7520_22 * NATURAL_FREQ;
++constexpr double DAMPING_4010 = 2.0 * DAMPING_RATIO * ARMATURE_4010 * NATURAL_FREQ;
+ 
+ // Effort limits for different motor types (used for action scale computation)
+-const double EFFORT_LIMIT_5020 = 25.0;    // 5020 motor type
+-const double EFFORT_LIMIT_7520_14 = 88.0; // 7520_14 motor type
+-const double EFFORT_LIMIT_7520_22 = 139.0; // 7520_22 motor type
+-const double EFFORT_LIMIT_4010 = 5.0;     // 4010 motor type
++constexpr double EFFORT_LIMIT_5020 = 25.0;    // 5020 motor type
++constexpr double EFFORT_LIMIT_7520_14 = 88.0; // 7520_14 motor type
++constexpr double EFFORT_LIMIT_7520_22 = 139.0; // 7520_22 motor type
++constexpr double EFFORT_LIMIT_4010 = 5.0;     // 4010 motor type
+ 
+ 
+ // VR5Point index (isaaclab index) left wrist, right wrist, pelvs, left ankle, right ankle
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+index a9ee7af..875ea0e 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+@@ -1,3 +1,6 @@
++#ifdef SONIC_SIM_ONLY
++#include "sim_only_guard.hpp"
++#endif
+ /**
+  * @file g1_deploy_onnx_ref.cpp
+  * @brief Main application: deploys an RL locomotion policy on the Unitree G1 robot.
+@@ -2220,7 +2223,9 @@ class G1Deploy {
+       // Initialize Dex3 hands (ChannelFactory already initialized above)
+       dex3_hands_.initialize("");
+ 
++      #ifndef SONIC_SIM_ONLY
+       audio_thread_ = std::make_unique<AudioThread>();
++#endif
+ 
+       if(!target_motion_file_path.empty())
+       {
+@@ -2278,6 +2283,7 @@ class G1Deploy {
+       planner_motion_->timesteps = 0;
+       planner_motion_->name = "planner_motion";
+       // try to shutdown motion control-related service
++      #ifndef SONIC_SIM_ONLY
+       msc_ = std::make_unique<unitree::robot::b2::MotionSwitcherClient>();
+       msc_->SetTimeout(5.0f);
+       msc_->Init();
+@@ -2287,6 +2293,8 @@ class G1Deploy {
+         sleep(5);
+       }
+ 
++      #endif
++
+       // create publisher
+       lowcmd_publisher_.reset(new ChannelPublisher<LowCmd_>(HG_CMD_TOPIC));
+       lowcmd_publisher_->InitChannel();
+@@ -2707,6 +2715,22 @@ class G1Deploy {
+           dds_low_command.motor_cmd().at(i).kd() = mc->kd.at(i);
+         }
+ 
++#ifdef SONIC_SIM_ONLY
++        try {
++          static size_t saturations=0, ticks=0;
++          for(size_t i=0;i<G1_NUM_MOTOR;i++) {
++            auto& m=dds_low_command.motor_cmd().at(i);
++            if(!std::isfinite(m.dq()) || !std::isfinite(m.tau()) || !std::isfinite(m.kp()) ||
++               !std::isfinite(m.kd()) || m.kp()<0 || m.kd()<0)
++              throw std::runtime_error("invalid command fields");
++            float q=sim_only::bounded_target(i,m.q());
++            saturations+=(q!=m.q());m.q()=q;
++          }
++          if(++ticks%500==0) std::cout<<"[SimGuard] publish_ticks="<<ticks<<" saturated_joint_targets="<<saturations<<std::endl;
++        } catch(const std::exception& e) {
++          std::cerr<<"[SimGuard] FAIL: "<<e.what()<<std::endl;std::_Exit(70);
++        }
++#endif
+         dds_low_command.crc() = Crc32Core((uint32_t*)&dds_low_command, (sizeof(dds_low_command) >> 2) - 1);
+         lowcmd_publisher_->Write(dds_low_command);
+       }
+@@ -3019,7 +3043,7 @@ class G1Deploy {
+       auto low_state_data = low_state_buffer_.GetDataWithTime();
+       bool low_state_late = (std::chrono::steady_clock::now() - low_state_data.timestamp) > LOW_STATE_LATE_THRESHOLD;
+ 
+-      audio_thread_->SetCommand(
++      if (audio_thread_) audio_thread_->SetCommand(
+         AudioCommand{
+           .streaming_data_absent = streaming_data_absent_debouncer_.state(),
+           .motor_error = error_monitor_.hasErrors(),
+@@ -4145,6 +4169,11 @@ static bool parse_motor_gain_scale_flag(
+  * The main loop sleeps until the operator issues a stop signal or ROS2 shuts down.
+  */
+ int main(int argc, char const* argv[]) {
++#ifdef SONIC_SIM_ONLY
++  try {sim_only::validate_namespace();}
++  catch(const std::exception& e){std::cerr<<"BLOCKED: "<<e.what()<<std::endl;return 78;}
++#endif
++
+   std::cout << "[DEBUG] Program starting..." << std::endl;
+   if (argc < 4) {
+     std::cout << "Usage: " << argv[0] << " <network_interface> <policy_file> <motion_data_path> [OPTIONS]"

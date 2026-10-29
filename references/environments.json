@@ -1,0 +1,25 @@
+{
+  "note": "Observed existing original-site environments, not a complete dependency lock or new-machine acceptance. Use pinned official lockfiles.",
+  "environments": {
+    "sim": {
+      "python": "3.10.21",
+      "numpy": "1.26.4",
+      "mujoco": "3.14.0",
+      "opencv-python": "4.11.0.86",
+      "msgpack": "1.2.2",
+      "pyzmq": "27.2.0",
+      "torch": "2.14.0"
+    },
+    "data": {
+      "python": "3.10.21",
+      "numpy": "1.26.4",
+      "opencv-python": "4.11.0.86",
+      "msgpack": "1.2.3",
+      "pyzmq": "27.2.0",
+      "torch": "2.6.0+cpu",
+      "torchvision": "0.21.0+cpu",
+      "av": "17.1.0",
+      "lerobot": "0.1.0"
+    }
+  }
+}

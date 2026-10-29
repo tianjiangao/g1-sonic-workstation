@@ -1,0 +1,14 @@
+{
+  "source": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_1.tar.bz2",
+  "asset_id": 677614055,
+  "sha256": "259c9c8bc906d6078e4e0570421885dabb68b539c2f970fcbb890a58eeaf3e9c",
+  "upstream_model": "hexgrad/Kokoro-82M-v1.1-zh",
+  "license": "Apache-2.0",
+  "runtime": "sherpa-onnx==2.0.1",
+  "numpy": "1.26.4",
+  "threads": 2,
+  "provider": "cpu",
+  "speaker_id": 58,
+  "speaker_name": "zm_009",
+  "hardware_interface": "G1 AudioClient.PlayStream; mono PCM 16000Hz s16le"
+}

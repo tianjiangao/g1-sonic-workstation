@@ -1,0 +1,11 @@
+enP8p1s0
+policy/release/model_decoder.onnx
+reference/example/
+--obs-config policy/release/observation_config.yaml
+--encoder-file policy/release/model_encoder.onnx
+--planner-file planner/target_vel/V2/planner_sonic.onnx
+--input-type zmq_manager
+--output-type zmq
+--zmq-host 192.168.123.99
+--zmq-port 5556
+--zmq-out-port 5557

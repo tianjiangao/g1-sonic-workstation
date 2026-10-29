@@ -1,0 +1,6 @@
+{
+  "binary_sha256": "dee4d41ba022706c03368df99056f01ece4999a85171b0a632d34acedd02580f",
+  "container_binary": "/workspace/g1_deploy/diagnostics/readonly_health_v1_287b42cd445d/passive_health_poll",
+  "source_sha256": "287b42cd445d74957aed6c5121a1432d1233d8c75b984665fd9e9679675120ae",
+  "transport": "CycloneDDS polling readers; no callback listener, writer, or RPC"
+}

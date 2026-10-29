@@ -1,0 +1,5 @@
+--manager
+--zmq_feedback_host 192.168.123.164
+--zmq_feedback_port 5557
+--vis_vr3pt
+--vis_smpl

@@ -1,0 +1,8 @@
+{
+  "classification": "engineering_only",
+  "files_scanned": 201,
+  "credential_pattern_findings": [],
+  "internal_site_identifier_findings": 0,
+  "shell_syntax": "PASS",
+  "method": "Allowlisted UTF-8 source/docs only; pattern scan is not a guarantee of absence of all secrets."
+}

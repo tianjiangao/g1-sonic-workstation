@@ -1,0 +1,10 @@
+--camera-host 192.168.123.164
+--camera-port 5555
+--sonic-zmq-host 192.168.123.99
+--sonic-zmq-port 5556
+--state-zmq-host 192.168.123.164
+--state-zmq-port 5557
+--record-wrist-cameras
+--data-collection-frequency 50
+--no-text-to-speech
+--robot-config-timeout 10
