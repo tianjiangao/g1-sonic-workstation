@@ -8,17 +8,7 @@ A practical integration layer built while bringing up a Unitree G1 with NVIDIA S
 
 The contribution is the integration: explicit physical left/right Dex1 routing, bounded PICO input freshness, a USB binocular head camera plus two D405 wrists, asynchronous Chinese speech through the G1 speaker, episode/batch management, measured-state replay, and a fail-closed data preparation pipeline.
 
-```mermaid
-flowchart LR
-  P[PICO + SONIC + Dex1] --> C[Passive event capture + voice]
-  C --> R[Human replay and review]
-  R --> T[Real 64D token + 2D Dex1]
-  T --> E[Official export and cleaning]
-  E --> V[Reader checks + hashes]
-  V --> H[Verified SSH handoff]
-  H --> F[Fine-tuning and evaluation gates]
-  C --> M[Passive MuJoCo replay]
-```
+![G1 SONIC workflow](docs/pipeline.svg)
 
 | Directory | What it contains |
 |---|---|
